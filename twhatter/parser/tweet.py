@@ -37,7 +37,7 @@ class Tweet:
     @staticmethod
     def extract_timestamp(soup):
         return datetime.utcfromtimestamp(
-            int(soup.find('span', '_timestamp')['data-time'])
+            int(soup.find('span', attrs={'data-time': True})['data-time'])
         )
 
     @staticmethod
@@ -104,7 +104,10 @@ class TweetList:
 
     def __iter__(self):
         for tweet in self.raw_tweets:
-            yield Tweet.extract(tweet)
+            # Don't know what this u-dir stuff is about but if it's in there,
+            # it's not a tweet !
+            if not tweet.find_all('p', class_="u-dir"):
+                yield Tweet.extract(tweet)
 
     def __len__(self):
         return len(self.raw_tweets)

@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # coding: utf-8
 
 """Console script for twhatter."""
@@ -6,12 +7,15 @@ import click
 from twhatter.api import ApiUser
 
 
-@click.command()
-@click.option('--user', prompt='User name to check',
-              help='The person to greet.')
-@click.option('-r', '--replies', is_flag=True)
-def main(user, replies):
-    """Console script for twhatter."""
+@click.group()
+def main():
+    pass
+
+
+@main.command()
+@click.argument('user')
+def own(user):
+    """Get all the user's own publications"""
     a = ApiUser(user)
 
     for t in a.iter_tweets():
