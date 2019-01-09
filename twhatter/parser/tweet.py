@@ -1,29 +1,38 @@
 from datetime import datetime
 
 from bs4 import BeautifulSoup
-from dataclasses import dataclass, fields, field
+from dataclasses import dataclass, fields, InitVar, field
 
 
 @dataclass
 class Tweet:
-    #timestamp: datetime
-    user: str
-    #fullname: fullname
     id: int
-    #url: url
     timestamp: datetime
-    #text: str
-    #replies: int
+    user: str
+    replies: int
     retweets: int
-    #quoted_tweet: int
     likes: int
-    #html: str
-    #soup: Any
-    soup: BeautifulSoup = field(repr=False)
+    text: str = field(repr=False)
+    soup: InitVar[BeautifulSoup] = None
+
+    def __post_init__(self, soup):
+        self.soup = soup
+
+    @staticmethod
+    def _extract_data(soup, distinct_span, data_kw):
+        return (
+            soup.find('span', distinct_span)
+                .find('span', attrs={data_kw: True})
+            [data_kw]
+        )
 
     @staticmethod
     def extract_id(soup):
         return int(soup['data-item-id'])
+
+    @staticmethod
+    def extract_user(soup):
+        return soup.find('span', 'username').text
 
     @staticmethod
     def extract_timestamp(soup):
@@ -32,21 +41,36 @@ class Tweet:
         )
 
     @staticmethod
-    def extract_user(soup):
-        return soup.find('span', 'username').text or ""
-
-    @staticmethod
     def extract_fullname(soup):
-        return soup.find('strong', 'fullname').text or ""
+        return soup.find('strong', 'fullname').text
+
+    @classmethod
+    def extract_retweets(cls, soup):
+        return cls._extract_data(
+            soup,
+            'ProfileTweet-action--retweet',
+            'data-tweet-stat-count'
+        )
+
+    @classmethod
+    def extract_replies(cls, soup):
+        return cls._extract_data(
+            soup,
+            'ProfileTweet-action--reply',
+            'data-tweet-stat-count'
+        )
+
+    @classmethod
+    def extract_likes(cls, soup):
+        return cls._extract_data(
+            soup,
+            'ProfileTweet-action--favorite',
+            'data-tweet-stat-count'
+        )
 
     @staticmethod
-    def extract_retweets(soup):
-        return int(soup.find(
-                    'span', 'ProfileTweet-action--retweet u-hiddenVisually')
-                       .find(
-                    'span', 'ProfileTweet-actionCount'
-                    )['data-tweet-stat-count']
-                   )
+    def extract_text(soup):
+        return soup.find('p', 'tweet-text').text
 
     @staticmethod
     def extract_quoted_tweet(soup):
@@ -71,7 +95,7 @@ class Tweet:
             return fn(soup)
 
         kwargs = {f.name: _extract_value(f) for f in fields(cls)}
-        return cls(**kwargs)
+        return cls(soup=soup, **kwargs)
 
 
 class TweetList:
