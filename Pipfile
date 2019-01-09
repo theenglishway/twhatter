@@ -1,0 +1,26 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pip = "*"
+bumpversion = "*"
+wheel = "*"
+watchdog = "*"
+flake8 = "*"
+tox = "*"
+coverage = "*"
+Sphinx = "*"
+twine = "*"
+ipython = "*"
+sphinx = "*"
+httpie = "*"
+pytest = "*"
+pytest-runner = "*"
+
+[packages]
+bs4 = "*"
+lxml = "*"
+requests = "*"
+twhatter = {path = ".",editable = true}
