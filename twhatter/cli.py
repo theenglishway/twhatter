@@ -4,15 +4,23 @@
 import sys
 import click
 
+from twhatter.query import Query
+from twhatter.api import ApiUser
+from bs4 import BeautifulSoup
+from twhatter.parser import TweetList
+from twhatter.output import Print
 
 @click.command()
-def main(args=None):
+@click.option('--user', prompt='User name to check',
+              help='The person to greet.')
+def main(user):
     """Console script for twhatter."""
-    click.echo("Replace this message by putting your code into "
-               "twhatter.cli.main")
-    click.echo("See click documentation at http://click.pocoo.org/")
-    return 0
+    q = Query(ApiUser(user).init_page)
+    soup = BeautifulSoup(q.text, "lxml")
+    t_list = TweetList(soup)
+    for t in t_list:
+        click.echo(t)
 
 
 if __name__ == "__main__":
-    sys.exit(main())  # pragma: no cover
+    main()
