@@ -105,3 +105,6 @@ class TweetList:
     def __iter__(self):
         for tweet in self.raw_tweets:
             yield Tweet.extract(tweet)
+
+    def __len__(self):
+        return len(self.raw_tweets)

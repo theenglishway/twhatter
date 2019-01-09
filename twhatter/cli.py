@@ -4,21 +4,18 @@
 import click
 
 from twhatter.api import ApiUser
-from bs4 import BeautifulSoup
-from twhatter.parser import TweetList
 
 
 @click.command()
 @click.option('--user', prompt='User name to check',
               help='The person to greet.')
-def main(user):
+@click.option('-r', '--replies', is_flag=True)
+def main(user, replies):
     """Console script for twhatter."""
-    p = ApiUser(user).init_page
-    soup = BeautifulSoup(p.text, "lxml")
-    t_list = TweetList(soup)
-    for t in t_list:
-        click.echo(t)
+    a = ApiUser(user)
 
+    for t in a.iter_tweets():
+        click.echo(t)
 
 if __name__ == "__main__":
     main()
