@@ -20,6 +20,11 @@ def user():
 
 
 @pytest.fixture(scope="session")
+def user_prolific():
+    return "realDonaldTrump"
+
+
+@pytest.fixture(scope="session")
 def tweet_limit():
     return 10
 

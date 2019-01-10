@@ -19,19 +19,25 @@ def test_command_line_interface(cli_runner):
 
 class TestMain:
     @pytest.mark.send_request
-    def test_timeline_no_limit(self, cli_runner, user):
-        result = cli_runner.invoke(cli.main, ['timeline', user])
+    def test_timeline_no_limit(self, cli_runner, user_prolific):
+        result = cli_runner.invoke(
+            cli.main,
+            ['timeline', user_prolific]
+        )
         assert result.exit_code == 0
 
         lines = result.output.split('\n')[:-1]
-        assert 100 > len(lines) > 0
+        assert len(lines) == 100
 
         for l in lines:
             assert "Tweet" in l
 
     @pytest.mark.send_request
-    def test_timeline_limit(self, cli_runner, user, tweet_limit):
-        result = cli_runner.invoke(cli.main, ['timeline', user, '--limit', tweet_limit])
+    def test_timeline_limit(self, cli_runner, user_prolific, tweet_limit):
+        result = cli_runner.invoke(
+            cli.main,
+            ['timeline', user_prolific, '--limit', tweet_limit]
+        )
         assert result.exit_code == 0
 
         lines = result.output.split('\n')[:-1]
@@ -40,6 +46,17 @@ class TestMain:
 
 class TestDb:
     @pytest.mark.send_request
-    def test_timeline_no_limit(self, cli_runner, user):
-        result = cli_runner.invoke(cli.main, ['db', 'timeline', user])
+    def test_timeline_no_limit(self, cli_runner, user_prolific):
+        result = cli_runner.invoke(
+            cli.main,
+            ['db', 'timeline', user_prolific]
+        )
+        assert result.exit_code == 0
+
+    @pytest.mark.send_request
+    def test_timeline_limit(self, cli_runner, user_prolific, tweet_limit):
+        result = cli_runner.invoke(
+            cli.main,
+            ['db', 'timeline', user_prolific, '--limit', tweet_limit]
+        )
         assert result.exit_code == 0
