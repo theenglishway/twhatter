@@ -3,33 +3,53 @@ Twhatter
 ========
 
 
-.. image:: https://img.shields.io/pypi/v/twhatter.svg
-        :target: https://pypi.python.org/pypi/twhatter
+A simple scraper for Twitter
 
-.. image:: https://img.shields.io/travis/theenglishway/twhatter.svg
-        :target: https://travis-ci.org/theenglishway/twhatter
+Installation
+------------
 
-.. image:: https://readthedocs.org/projects/twhatter/badge/?version=latest
-        :target: https://twhatter.readthedocs.io/en/latest/?badge=latest
-        :alt: Documentation Status
+..highlight: shell
 
+    $ pip install -e git+https://code.theenglishway.eu/theenglishway-corp/twhatter
 
-Scraper for Twitter
+Use
+---
 
+Display some user's tweets
 
-* Free software: BSD license
-* Documentation: https://code.theenglishway.eu/theenglishway-utils/twhatter
+..highlight: shell
 
+    $ twhatter timeline realDonaldTrump --limit 10
+    <TweetTextOnly (id=1083404900862545920, date=2019-01-10 16:47:11, likes=32033, likes=11087, likes=6935)>
+    <TweetTextOnly (id=1083358775925460992, date=2019-01-10 13:43:54, likes=96565, likes=22596, likes=26802)>
+    <TweetTextOnly (id=1083358611315789826, date=2019-01-10 13:43:15, likes=52849, likes=9344, likes=9571)>
+    <TweetTextOnly (id=1083358150214979585, date=2019-01-10 13:41:25, likes=48808, likes=11096, likes=11499)>
+    <TweetTextOnly (id=1083356326833602561, date=2019-01-10 13:34:10, likes=50695, likes=11743, likes=11045)>
+    <TweetTextOnly (id=1083353895030702080, date=2019-01-10 13:24:30, likes=85184, likes=19686, likes=27751)>
+    <TweetRetweet (id=1083121283645272064, date=2019-01-09 22:00:12, likes=42640, likes=13189, likes=10242)>
+    <TweetRetweet (id=1082774275390693376, date=2019-01-08 23:01:18, likes=52776, likes=14459, likes=2403)>
+    <TweetRetweet (id=1083049664021233664, date=2019-01-09 17:15:36, likes=64770, likes=21099, likes=7818)>
+    <TweetRetweet (id=1083148367184781312, date=2019-01-09 23:47:49, likes=75514, likes=21966, likes=6145)>
 
-Features
---------
+Put them into a local database (by default in /tmp/db.sqlite)
 
-* TODO
+..highlight: shell
 
-Credits
--------
+    $ twhatter db timeline realDonaldTrump
 
-This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+Open a session on the local database and make queries with SQLAlchemy
 
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+..highlight: shell
+
+    $ twhatter db shell
+
+..highlight: python
+
+    In [1]: session.query(Tweet).all()
+    Out[1]:
+    [<Tweet (id=1020561192849412096),
+     <Tweet (id=1021305708908818433),
+     <Tweet (id=1024699386528505856),
+     <Tweet (id=1026373195790802949),
+     <Tweet (id=1026482814164844544),
+     <Tweet (id=1027797734613504001)]
