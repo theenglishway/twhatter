@@ -25,11 +25,8 @@ class TestTweet:
     ]
 
     @pytest.mark.parametrize("tweet_type", all_types)
-    def test_tweet(self, raw_tweet_factory, tweet_collection, tweet_type):
-        tweet_info = tweet_collection[tweet_type]
-        raw = raw_tweet_factory(tweet_info)
-        t = TweetBase.extract(raw)
-        assert t
+    def test_tweet(self, tweet_test_data_factory, tweet_type):
+        t, tweet_info = tweet_test_data_factory(tweet_type)
 
         for field, value in tweet_info._asdict().items():
             # It would be rather complicated to keep some test fixtures values
@@ -45,8 +42,6 @@ class TestTweet:
         ('with_link', TweetLink),
         ('retweet', TweetRetweet)
     ])
-    def test_tweet_type(self, raw_tweet_factory, tweet_collection, tweet_type, expected_class):
-        tweet_info = tweet_collection[tweet_type]
-        raw = raw_tweet_factory(tweet_info)
-        t = TweetBase.extract(raw)
+    def test_tweet_type(self, tweet_test_data_factory, tweet_type, expected_class):
+        t, tweet_info = tweet_test_data_factory(tweet_type)
         assert isinstance(t, expected_class)

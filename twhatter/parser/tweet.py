@@ -46,11 +46,11 @@ class TweetBase:
     #: The soup extracted from the raw HTML
     soup: InitVar[BeautifulSoup] = None
 
-    def __post_init__(self, soup):
+    def __post_init__(self, soup: BeautifulSoup):
         self.soup = soup
 
     @staticmethod
-    def condition(kwargs):
+    def condition(kwargs: dict) -> bool:
         raise NotImplementedError()
 
     @staticmethod
@@ -184,30 +184,6 @@ class TweetBase:
     def extract_soup(soup):
         return soup
 
-    @classmethod
-    def extract(cls, soup):
-        def _extract_value(field):
-            fn = getattr(cls, "extract_{}".format(field.name), None)
-            if not fn:
-                raise NotImplementedError(
-                    "Extract function for field '{}' is not "
-                    "implemented".format(field.name)
-                )
-
-            return fn(soup)
-
-        kwargs = {f.name: _extract_value(f) for f in fields(cls)}
-
-        for kls in cls.__subclasses__():
-            try:
-                print(kls)
-                if kls.condition(kwargs):
-                    return kls(soup=soup, **kwargs)
-            except NotImplementedError:
-                continue
-        else:
-            return TweetTextOnly(soup=soup, **kwargs)
-
 
 class TweetTextOnly(TweetBase):
     """An original tweet with only plain text"""
@@ -217,7 +193,6 @@ class TweetLink(TweetBase):
     """An original tweet with a link"""
     @staticmethod
     def condition(kwargs):
-        print(kwargs)
         return kwargs['link_to']
 
 
@@ -235,6 +210,33 @@ class TweetReaction(TweetBase):
         return kwargs['reacted_id']
 
 
+def tweet_factory(soup: BeautifulSoup) -> TweetBase:
+    """
+    :param soup: the soup extracted from the raw html for that tweet
+    :return: a well-formatted Tweet
+    """
+    def _extract_value(data_field):
+        fn = getattr(TweetBase, "extract_{}".format(data_field.name), None)
+        if not fn:
+            raise NotImplementedError(
+                "Extract function for field '{}' is not "
+                "implemented".format(data_field.name)
+            )
+
+        return fn(soup)
+
+    kwargs = {f.name: _extract_value(f) for f in fields(TweetBase)}
+
+    for kls in TweetBase.__subclasses__():
+        try:
+            if kls.condition(kwargs):
+                return kls(soup=soup, **kwargs)
+        except NotImplementedError:
+            continue
+    else:
+        return TweetTextOnly(soup=soup, **kwargs)
+
+
 class TweetList:
     def __init__(self, soup):
         self.raw_tweets = soup.find_all('li', 'stream-item')
@@ -244,7 +246,7 @@ class TweetList:
             # Don't know what this u-dir stuff is about but if it's in there,
             # it's not a tweet !
             if not tweet.find_all('p', class_="u-dir"):
-                yield TweetBase.extract(tweet)
+                yield tweet_factory(tweet)
 
     def __len__(self):
         return len(self.raw_tweets)

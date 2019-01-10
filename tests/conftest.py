@@ -5,7 +5,7 @@ from click.testing import CliRunner
 from bs4 import BeautifulSoup
 
 from twhatter.api import ApiUser
-from twhatter.parser import TweetList
+from twhatter.parser import tweet_factory
 from typing import NamedTuple, List
 
 @pytest.fixture
@@ -45,6 +45,7 @@ class TweetInfo(NamedTuple):
     reacted_id: int = None
     reacted_user_id: int = None
     link_to: str = None
+
 
 @pytest.fixture(scope="session")
 def tweet_collection():
@@ -133,4 +134,15 @@ def raw_tweet_factory(raw_html_user_initial_page_factory):
         user_page = tweet_info.retweeter or tweet_info.screen_name
         soup = raw_html_user_initial_page_factory(user_page)
         return soup.find(id="stream-item-tweet-{}".format(tweet_info.id))
+
     return _raw_tweet_factory
+
+
+@pytest.fixture(scope="session")
+def tweet_test_data_factory(raw_tweet_factory, tweet_collection):
+    def _tweet_test_data_factory(tweet_type):
+        tweet_info = tweet_collection[tweet_type]
+        raw_tweet = raw_tweet_factory(tweet_info)
+        return tweet_factory(raw_tweet), tweet_info
+
+    return _tweet_test_data_factory
