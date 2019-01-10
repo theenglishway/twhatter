@@ -6,7 +6,7 @@ from typing import List
 
 
 @dataclass
-class Tweet:
+class TweetBase:
     #: Tweet ID
     id: int
     #: Handle of the tweet's original author
@@ -48,6 +48,10 @@ class Tweet:
 
     def __post_init__(self, soup):
         self.soup = soup
+
+    @staticmethod
+    def condition(kwargs):
+        raise NotImplementedError()
 
     @staticmethod
     def _extract_from_span(soup, distinct_span, data_kw):
@@ -193,7 +197,42 @@ class Tweet:
             return fn(soup)
 
         kwargs = {f.name: _extract_value(f) for f in fields(cls)}
-        return cls(soup=soup, **kwargs)
+
+        for kls in cls.__subclasses__():
+            try:
+                print(kls)
+                if kls.condition(kwargs):
+                    return kls(soup=soup, **kwargs)
+            except NotImplementedError:
+                continue
+        else:
+            return TweetTextOnly(soup=soup, **kwargs)
+
+
+class TweetTextOnly(TweetBase):
+    """An original tweet with only plain text"""
+
+
+class TweetLink(TweetBase):
+    """An original tweet with a link"""
+    @staticmethod
+    def condition(kwargs):
+        print(kwargs)
+        return kwargs['link_to']
+
+
+class TweetRetweet(TweetBase):
+    """A plain retweet"""
+    @staticmethod
+    def condition(kwargs):
+        return kwargs['retweet_id']
+
+
+class TweetReaction(TweetBase):
+    """A reaction to another tweet"""
+    @staticmethod
+    def condition(kwargs):
+        return kwargs['reacted_id']
 
 
 class TweetList:
@@ -205,7 +244,7 @@ class TweetList:
             # Don't know what this u-dir stuff is about but if it's in there,
             # it's not a tweet !
             if not tweet.find_all('p', class_="u-dir"):
-                yield Tweet.extract(tweet)
+                yield TweetBase.extract(tweet)
 
     def __len__(self):
         return len(self.raw_tweets)
