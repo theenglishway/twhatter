@@ -25,3 +25,4 @@ lxml = "*"
 requests = "*"
 twhatter = {path = ".",editable = true}
 sqlalchemy = "*"
+user-agent = "*"
