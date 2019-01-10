@@ -12,20 +12,26 @@ class Tweet:
     screen_name: str
     #: ID of the tweet's original author
     user_id: int
+    #: Number of comments
+    comments_nb: int
+    #: Number of retweets
+    retweets_nb: int
+    #: Number of likes
+    likes_nb: int
+
     timestamp: datetime
-    replies: int
-    retweets: int
-    likes: int
     text: str = field(repr=False)
+
     #: Handle of the tweet's retweeter
     retweeter: str = None
+    #: The soup extracted from the raw HTML
     soup: InitVar[BeautifulSoup] = None
 
     def __post_init__(self, soup):
         self.soup = soup
 
     @staticmethod
-    def _extract_data(soup, distinct_span, data_kw):
+    def _extract_from_span(soup, distinct_span, data_kw):
         return (
             soup.find('span', distinct_span)
                 .find('span', attrs={data_kw: True})
@@ -69,28 +75,28 @@ class Tweet:
         return soup.find('strong', 'fullname').text
 
     @classmethod
-    def extract_retweets(cls, soup):
-        return cls._extract_data(
+    def extract_retweets_nb(cls, soup):
+        return int(cls._extract_from_span(
             soup,
             'ProfileTweet-action--retweet',
             'data-tweet-stat-count'
-        )
+        ))
 
     @classmethod
-    def extract_replies(cls, soup):
-        return cls._extract_data(
+    def extract_comments_nb(cls, soup):
+        return int(cls._extract_from_span(
             soup,
             'ProfileTweet-action--reply',
             'data-tweet-stat-count'
-        )
+        ))
 
     @classmethod
-    def extract_likes(cls, soup):
-        return cls._extract_data(
+    def extract_likes_nb(cls, soup):
+        return int(cls._extract_from_span(
             soup,
             'ProfileTweet-action--favorite',
             'data-tweet-stat-count'
-        )
+        ))
 
     @staticmethod
     def extract_text(soup):

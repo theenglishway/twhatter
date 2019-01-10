@@ -28,10 +28,11 @@ def tweet_limit():
 class TweetInfo(NamedTuple):
     """Class to hold information about a tweet that is already known"""
     id: int
-    # Name of the original author
     screen_name: str
     user_id: int
-    # Name of the retweeter user
+    comments_nb: int = None
+    retweets_nb: int = None
+    likes_nb: int = None
     retweeter: str = None
 
 @pytest.fixture(scope="session")
@@ -57,7 +58,16 @@ def tweet_collection():
             screen_name="Senficon",
             user_id=14861745,
             retweeter="the_english_way"
-        )
+        ),
+        'stats': TweetInfo(
+            id=1039969574555471873,
+            screen_name="BurgerQuizOff",
+            user_id=949604705772228608,
+            retweeter="the_english_way",
+            comments_nb=12,
+            retweets_nb=176,
+            likes_nb=556
+        ),
     }
 
 
