@@ -8,9 +8,14 @@ A simple scraper for Twitter
 Installation
 ------------
 
+Installation requires Python >= 3.6.
+
 ..highlight: shell
 
-    $ pip install --user -e git+https://code.theenglishway.eu/theenglishway-corp/twhatter
+    $ pip install --user git+https://code.theenglishway.eu/theenglishway-corp/twhatter
+
+You then have to ensure that `~/.local/bin` in your `$PATH` or call
+`~/.local/bin/twhatter` instead of `twhatter` in the following examples
 
 Use
 ---
