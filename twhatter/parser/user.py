@@ -48,7 +48,7 @@ class User(ExtractableMixin):
         # The date is in a weird format (e.g. "7:27 AM - 8 May 2011") and we
         # don't really care for the exact hour so we only keep the date
         day_str = datetime_str.split(' - ')[1]
-        return datetime.strptime(day_str, '%d %B %Y')
+        return datetime.strptime(day_str, '%d %b %Y')
 
     @classmethod
     def extract_tweets_nb(cls, soup):

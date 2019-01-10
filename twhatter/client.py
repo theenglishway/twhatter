@@ -2,7 +2,7 @@ import requests
 from random import choice
 from bs4 import BeautifulSoup
 
-from twhatter.parser import TweetList
+from twhatter.parser import TweetList, user_factory
 import json
 
 
@@ -15,6 +15,17 @@ class Client():
         'Mozilla/5.0 (Windows NT 5.2; RW; rv:7.0a1) Gecko/20091211 SeaMonkey/9.23a1pre'
     ]
 
+    @classmethod
+    def get_user_timeline(cls, user_handle):
+        url = "https://twitter.com/{}".format(user_handle)
+        return requests.get(
+            url,
+            headers={
+                'User-Agent': choice(cls.HEADERS_LIST),
+                'Accept-Language': 'en'
+            }
+        )
+
 
 class ClientTimeline(Client):
     """Access and explore some user's timeline"""
@@ -23,13 +34,6 @@ class ClientTimeline(Client):
         self.earliest_tweet = None
         self.nb_tweets = 0
         self.limit = limit
-
-    def get_initial(self):
-        url = "https://twitter.com/{}".format(self.user)
-        return requests.get(
-            url,
-            headers={'User-Agent': choice(self.HEADERS_LIST), 'Accept-Language': 'en'}
-        )
 
     def get_more_tweets(self):
         return requests.get(
@@ -44,7 +48,7 @@ class ClientTimeline(Client):
         )
 
     def __iter__(self):
-        tweets = self.get_initial()
+        tweets = self.get_user_timeline(self.user)
         soup = BeautifulSoup(tweets.text, "lxml")
         t_list = TweetList(soup)
 
@@ -67,3 +71,12 @@ class ClientTimeline(Client):
                 self.earliest_tweet = t.id
                 self.nb_tweets += 1
 
+
+class ClientProfile(Client):
+    """Get profile information about an user"""
+    def __init__(self, user_handle):
+        self.user_handle = user_handle
+        user_page = self.get_user_timeline(user_handle)
+        soup = BeautifulSoup(user_page.text, "lxml")
+
+        self.user = user_factory(soup)

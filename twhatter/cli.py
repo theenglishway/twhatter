@@ -5,7 +5,7 @@
 import click
 import IPython
 
-from twhatter.client import ClientTimeline
+from twhatter.client import ClientTimeline, ClientProfile
 from twhatter.output import Database, Tweet
 
 
@@ -27,6 +27,14 @@ def timeline(limit, user):
             break
 
         click.echo(t)
+
+
+@main.command()
+@click.argument('user')
+def profile(user):
+    """Get basic info about some user"""
+    p = ClientProfile(user)
+    click.echo(p.user)
 
 
 @main.group()

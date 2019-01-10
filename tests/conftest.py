@@ -123,7 +123,7 @@ def tweet_collection():
 def raw_html_user_initial_page_factory():
     def _raw_html_user_initial_page(user):
         a = ClientTimeline(user)
-        response = a.get_initial()
+        response = a.get_user_timeline(user)
         return BeautifulSoup(response.text, "lxml")
     return _raw_html_user_initial_page
 
@@ -158,10 +158,10 @@ class UserInfo(NamedTuple):
     id: int
     screen_name: str
     join_date: datetime
-    tweets_nb: int
-    following_nb: int
-    followers_nb: int
-    likes_nb: int
+    tweets_nb: int = None
+    following_nb: int = None
+    followers_nb: int = None
+    likes_nb: int = None
 
 
 @pytest.fixture(scope="session")
@@ -175,5 +175,10 @@ def user_collection():
             following_nb=344,
             followers_nb=81,
             likes_nb=4
+        ),
+        'the_english_way': UserInfo(
+            id=943804775942033408,
+            screen_name="theenglishway",
+            join_date=datetime(2017, 12, 21, 0, 0),
         ),
     }

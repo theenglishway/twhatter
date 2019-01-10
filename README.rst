@@ -31,6 +31,13 @@ Display some user's tweets
     <TweetRetweet (id=1083049664021233664, date=2019-01-09 17:15:36, likes=64770, likes=21099, likes=7818)>
     <TweetRetweet (id=1083148367184781312, date=2019-01-09 23:47:49, likes=75514, likes=21966, likes=6145)>
 
+Display their profile information
+
+..highlight: shell
+
+    $ twhatter profile realDonaldTrump
+    User(id=25073877, screen_name='Donald J. Trump', join_date=datetime.datetime(2009, 3, 18, 0, 0), tweets_nb=40183, following_nb=45, followers_nb=57144827, likes_nb=7)
+
 Put them into a local database (by default in /tmp/db.sqlite)
 
 ..highlight: shell

@@ -43,6 +43,14 @@ class TestMain:
         lines = result.output.split('\n')[:-1]
         assert len(lines) == tweet_limit
 
+    @pytest.mark.send_request
+    def test_profile(self, cli_runner, user_prolific, tweet_limit):
+        result = cli_runner.invoke(
+            cli.main,
+            ['profile', user_prolific]
+        )
+        assert result.exit_code == 0
+
 
 class TestDb:
     @pytest.mark.send_request

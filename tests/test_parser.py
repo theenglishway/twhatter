@@ -49,7 +49,8 @@ class TestTweet:
 
 class TestUser:
     all_handles = [
-        "Marlene_beadles"
+        "Marlene_beadles",
+        "the_english_way"
     ]
 
     @pytest.mark.parametrize("user_handle", all_handles)
@@ -59,4 +60,9 @@ class TestUser:
         user = user_factory(raw_user)
 
         for field, value in user_info._asdict().items():
-            assert getattr(user, field) == value
+            # It would be rather complicated to keep some test fixtures values
+            # accurate (e.g. number of likes, retweets, ...) so for most
+            # of them, the expected values are not set on purpose and therefore
+            # not tested
+            if value is not None:
+                assert getattr(user, field) == value
