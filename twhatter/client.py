@@ -21,6 +21,7 @@ class ClientTimeline(Client):
     def __init__(self, user, limit=100):
         self.user = user
         self.earliest_tweet = None
+        self.nb_tweets = 0
         self.limit = limit
 
     def get_initial(self):
@@ -50,8 +51,9 @@ class ClientTimeline(Client):
         for t in t_list:
             yield t
             self.earliest_tweet = t.id
+            self.nb_tweets += 1
 
-        while True:
+        while True and self.nb_tweets < self.limit:
             more_tweets = self.get_more_tweets()
             html = json.loads(more_tweets.content)
             soup = BeautifulSoup(html['items_html'], "lxml")
@@ -63,3 +65,5 @@ class ClientTimeline(Client):
             for t in t_list:
                 yield t
                 self.earliest_tweet = t.id
+                self.nb_tweets += 1
+
