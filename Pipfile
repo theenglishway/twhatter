@@ -24,3 +24,4 @@ bs4 = "*"
 lxml = "*"
 requests = "*"
 twhatter = {path = ".",editable = true}
+sqlalchemy = "*"
