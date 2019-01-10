@@ -49,6 +49,14 @@ class TweetBase:
     def __post_init__(self, soup: BeautifulSoup):
         self.soup = soup
 
+    def __repr__(self):
+        return ("<{0} "
+                "(id={1.id}, "
+                "date={1.timestamp}, "
+                "likes={1.likes_nb}, "
+                "likes={1.retweets_nb}, "
+                "likes={1.comments_nb})>".format(self.__class__.__qualname__, self))
+
     @staticmethod
     def condition(kwargs: dict) -> bool:
         raise NotImplementedError()
