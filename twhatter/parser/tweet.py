@@ -27,6 +27,8 @@ class Tweet:
     text: str = field(repr=False)
     #: List of hashtags in the tweet
     hashtag_list: List[str]
+    #: List of mentions in the tweet
+    mention_list: List[int]
 
     #: Handle of the tweet's retweeter
     retweeter: str = None
@@ -156,6 +158,18 @@ class Tweet:
         return [
             link.b.text
             for link in soup.find_all('a', class_="twitter-hashtag")
+        ]
+
+    @staticmethod
+    def extract_mention_list(soup):
+        data_kw="data-mentioned-user-id"
+        return [
+            int(value[data_kw])
+            for value in soup.find_all(
+                'a',
+                class_="twitter-atreply",
+                attrs={data_kw: True}
+            )
         ]
 
     @staticmethod

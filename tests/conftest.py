@@ -39,6 +39,7 @@ class TweetInfo(NamedTuple):
     retweets_nb: int = None
     likes_nb: int = None
     hashtag_list: List[str] = None
+    mention_list: List[int] = None
     retweeter: str = None
     retweet_id: int = None
     reacted_id: int = None
@@ -90,6 +91,14 @@ def tweet_collection():
             retweeter="the_english_way",
             permalink="/BurgerQuizOff/status/1039969574555471873",
             hashtag_list=["Nuggets", "BurgerQuiz", "PrivacyMonCul"]
+        ),
+        'mentions': TweetInfo(
+            id=1077838164813848576,
+            screen_name="the_english_way",
+            user_id=943804775942033408,
+            timestamp=datetime.utcfromtimestamp(1545811618),
+            permalink="/the_english_way/status/1077838164813848576",
+            mention_list=[1138959692]
         ),
         'stats': TweetInfo(
             id=1039969574555471873,

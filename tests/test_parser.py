@@ -20,6 +20,7 @@ class TestTweet:
         "with_link",
         "retweet",
         "hashtags",
+        "mentions",
         "stats",
     ])
     def test_plain_tweet(self, raw_tweet_factory, tweet_collection, tweet_type):
