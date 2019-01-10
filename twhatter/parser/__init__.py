@@ -1,6 +1,7 @@
 from .tweet import (TweetList, TweetBase,
                     tweet_factory,
                     TweetTextOnly, TweetLink, TweetReaction, TweetRetweet)
+from .user import user_factory
 
 __all__= [
     "TweetList",
@@ -9,5 +10,7 @@ __all__= [
     "TweetTextOnly",
     "TweetLink",
     "TweetReaction",
-    "TweetRetweet"
+    "TweetRetweet",
+
+    "user_factory"
 ]

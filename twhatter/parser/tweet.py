@@ -4,9 +4,11 @@ from bs4 import BeautifulSoup
 from dataclasses import dataclass, fields, InitVar, field
 from typing import List
 
+from .mixins import ExtractableMixin
+
 
 @dataclass
-class TweetBase:
+class TweetBase(ExtractableMixin):
     #: Tweet ID
     id: int
     #: Handle of the tweet's original author
@@ -46,9 +48,6 @@ class TweetBase:
     #: The soup extracted from the raw HTML
     soup: InitVar[BeautifulSoup] = None
 
-    def __post_init__(self, soup: BeautifulSoup):
-        self.soup = soup
-
     def __repr__(self):
         return ("<{0} "
                 "(id={1.id}, "
@@ -61,24 +60,9 @@ class TweetBase:
     def condition(kwargs: dict) -> bool:
         raise NotImplementedError()
 
-    @staticmethod
-    def _extract_from_span(soup, distinct_span, data_kw):
-        return (
-            soup.find('span', distinct_span)
-                .find('span', attrs={data_kw: True})
-            [data_kw]
-        )
-
     @classmethod
     def _extract_from_div_tweet(cls, soup, data_kw):
         return cls._extract_from_div(soup, 'tweet', data_kw)
-
-    @staticmethod
-    def _extract_from_div(soup, div_class, data_kw):
-        kw = "data-{}".format(data_kw)
-        return(
-            soup.find('div', class_=div_class, attrs={kw: True})[kw]
-        )
 
     @staticmethod
     def extract_id(soup):
@@ -188,10 +172,6 @@ class TweetBase:
     def extract_text(soup):
         return soup.find('p', 'tweet-text').text
 
-    @staticmethod
-    def extract_soup(soup):
-        return soup
-
 
 class TweetTextOnly(TweetBase):
     """An original tweet with only plain text"""
@@ -223,17 +203,9 @@ def tweet_factory(soup: BeautifulSoup) -> TweetBase:
     :param soup: the soup extracted from the raw html for that tweet
     :return: a well-formatted Tweet
     """
-    def _extract_value(data_field):
-        fn = getattr(TweetBase, "extract_{}".format(data_field.name), None)
-        if not fn:
-            raise NotImplementedError(
-                "Extract function for field '{}' is not "
-                "implemented".format(data_field.name)
-            )
-
-        return fn(soup)
-
-    kwargs = {f.name: _extract_value(f) for f in fields(TweetBase)}
+    kwargs = {
+        f.name: TweetBase._extract_value(soup, f) for f in fields(TweetBase)
+    }
 
     for kls in TweetBase.__subclasses__():
         try:

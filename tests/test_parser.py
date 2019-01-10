@@ -45,3 +45,18 @@ class TestTweet:
     def test_tweet_type(self, tweet_test_data_factory, tweet_type, expected_class):
         t, tweet_info = tweet_test_data_factory(tweet_type)
         assert isinstance(t, expected_class)
+
+
+class TestUser:
+    all_handles = [
+        "Marlene_beadles"
+    ]
+
+    @pytest.mark.parametrize("user_handle", all_handles)
+    def test_user(self, raw_html_user_initial_page_factory, user_collection, user_handle):
+        user_info = user_collection[user_handle]
+        raw_user = raw_html_user_initial_page_factory(user_handle)
+        user = user_factory(raw_user)
+
+        for field, value in user_info._asdict().items():
+            assert getattr(user, field) == value

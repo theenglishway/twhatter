@@ -32,7 +32,7 @@ class ApiUser(Api):
         url = "https://twitter.com/{}".format(self.user)
         return requests.get(
             url,
-            headers={'User-Agent': choice(self.HEADERS_LIST)}
+            headers={'User-Agent': choice(self.HEADERS_LIST), 'Accept-Language': 'en'}
         )
 
     def get_more_tweets(self):

@@ -146,3 +146,29 @@ def tweet_test_data_factory(raw_tweet_factory, tweet_collection):
         return tweet_factory(raw_tweet), tweet_info
 
     return _tweet_test_data_factory
+
+
+class UserInfo(NamedTuple):
+    """Class to hold information about an user that is already known"""
+    id: int
+    screen_name: str
+    join_date: datetime
+    tweets_nb: int
+    following_nb: int
+    followers_nb: int
+    likes_nb: int
+
+
+@pytest.fixture(scope="session")
+def user_collection():
+    return {
+        'Marlene_beadles': UserInfo(
+            id=295177446,
+            screen_name="Marlene Hansen",
+            join_date=datetime(2011, 5, 8, 0, 0),
+            tweets_nb=25,
+            following_nb=344,
+            followers_nb=81,
+            likes_nb=4
+        ),
+    }
