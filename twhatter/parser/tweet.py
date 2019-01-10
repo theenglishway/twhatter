@@ -18,8 +18,9 @@ class Tweet:
     retweets_nb: int
     #: Number of likes
     likes_nb: int
-
+    #: Timestamp of the original tweet
     timestamp: datetime
+
     text: str = field(repr=False)
 
     #: Handle of the tweet's retweeter

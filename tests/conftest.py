@@ -1,4 +1,6 @@
 import pytest
+from datetime import datetime
+
 from click.testing import CliRunner
 from bs4 import BeautifulSoup
 
@@ -30,6 +32,8 @@ class TweetInfo(NamedTuple):
     id: int
     screen_name: str
     user_id: int
+    timestamp: datetime = None
+    text: str = None
     comments_nb: int = None
     retweets_nb: int = None
     likes_nb: int = None
@@ -41,23 +45,29 @@ def tweet_collection():
         'plain': TweetInfo(
             id=1077838164813848576,
             screen_name="the_english_way",
-            user_id=943804775942033408
+            user_id=943804775942033408,
+            timestamp=datetime.utcfromtimestamp(1545811618),
+            text="""Ca y est j'ai un pipeline Concourse avec un job qui builde une image @Docker qui affiche un "Hello World" dans un autre job \o/
+........... je suis pas sûr de savoir ce que ça veut dire, mais en tout cas c'était mon objectif de la matinée """
         ),
         'reaction_tweet': TweetInfo(
             id=1078281840945963008,
             screen_name="the_english_way",
-            user_id=943804775942033408
+            user_id=943804775942033408,
+            timestamp=datetime.utcfromtimestamp(1545917399)
         ),
         'with_link': TweetInfo(
-            id=1078281840945963008,
+            id=1077505613079429120,
             screen_name="the_english_way",
-            user_id=943804775942033408
+            user_id=943804775942033408,
+            timestamp=datetime.utcfromtimestamp(1545732331)
         ),
         'retweet': TweetInfo(
             id=1055037291108974592,
             screen_name="Senficon",
             user_id=14861745,
-            retweeter="the_english_way"
+            retweeter="the_english_way",
+            timestamp=datetime.utcfromtimestamp(1540375466)
         ),
         'stats': TweetInfo(
             id=1039969574555471873,
