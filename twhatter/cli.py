@@ -6,7 +6,7 @@ import click
 import IPython
 
 from twhatter.client import ClientTimeline, ClientProfile
-from twhatter.output import Database, Tweet
+from twhatter.output.sqlalchemy import Database, Tweet, User
 
 
 @click.group()
@@ -59,13 +59,24 @@ def timeline(ctx, limit, user):
 
 
 @db.command()
+@click.argument('user')
+@click.pass_context
+def profile(ctx, user):
+    """Push some user into a database"""
+    p = ClientProfile(user)
+
+    ctx.obj['db'].add_all(User.from_raw(p.user))
+
+
+@db.command()
 @click.pass_context
 def shell(ctx):
     session = ctx.obj['db'].start()
     user_ns = {
         'db': ctx.obj['db'],
         'session': session,
-        'Tweet': Tweet
+        'Tweet': Tweet,
+        'User': User
     }
     IPython.start_ipython(argv=[], user_ns=user_ns)
     ctx.obj['db'].stop(session)

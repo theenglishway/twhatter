@@ -1,8 +1,9 @@
 from .db import Database
-from .models import Tweet
+from .models import *
 
 
 __all__ = [
     'Database',
-    'Tweet'
+    'Tweet',
+    'User'
 ]

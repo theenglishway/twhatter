@@ -1,7 +1,8 @@
 from dataclasses import asdict
 
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy.orm import relationship
 
 from twhatter.output.sqlalchemy.db import Base
 
@@ -11,7 +12,7 @@ class Tweet(Base):
 
     id = Column(Integer, primary_key=True)
     screen_name = Column(String)
-    user_id = Column(Integer)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     comments_nb = Column(Integer)
     retweets_nb = Column(Integer)
     likes_nb = Column(Integer)
@@ -20,6 +21,8 @@ class Tweet(Base):
     text = Column(String)
     _hashtag_list = Column("hashtag_list", String)
     _mention_list = Column(String)
+
+    user = relationship('User', backref='tweets')
 
     @hybrid_property
     def hashtag_list(self):
