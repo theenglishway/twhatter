@@ -10,7 +10,7 @@ Installation
 
 ..highlight: shell
 
-    $ pip install -e git+https://code.theenglishway.eu/theenglishway-corp/twhatter
+    $ pip install --user -e git+https://code.theenglishway.eu/theenglishway-corp/twhatter
 
 Use
 ---
