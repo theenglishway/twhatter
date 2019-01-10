@@ -1,1 +1,1 @@
-from .tweet import TweetList
+from .tweet import TweetList, Tweet
