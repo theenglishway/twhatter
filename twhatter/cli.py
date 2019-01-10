@@ -5,28 +5,25 @@
 import click
 import IPython
 
-from twhatter.api import ApiUser
+from twhatter.client import ClientTimeline
 from twhatter.output import Database, Tweet
 
 
 @click.group()
-@click.option('-l', '--limit', type=int, default=100, show_default=True)
 @click.pass_context
-def main(ctx, limit):
+def main(ctx):
     ctx.ensure_object(dict)
-
-    ctx.obj['limit'] = limit
 
 
 @main.command()
+@click.option('-l', '--limit', type=int, default=100, show_default=True)
 @click.argument('user')
-@click.pass_context
-def own(ctx, user):
+def timeline(limit, user):
     """Get some user's Tweets"""
-    a = ApiUser(user)
+    timeline = ClientTimeline(user)
 
-    for n, t in enumerate(a.iter_tweets()):
-        if n >= ctx.obj['limit']:
+    for n, t in enumerate(timeline):
+        if n >= limit:
             break
 
         click.echo(t)
@@ -40,14 +37,15 @@ def db(ctx, db_url):
 
 
 @db.command()
+@click.option('-l', '--limit', type=int, default=100, show_default=True)
 @click.argument('user')
 @click.pass_context
-def own(ctx, user):
+def timeline(ctx, limit, user):
     """Push user's Tweets into a database"""
-    a = ApiUser(user)
+    timeline = ClientTimeline(user)
 
     tweets = [
-        Tweet.from_raw(t) for n, t in enumerate(a.iter_tweets()) if n < ctx.obj['limit']
+        Tweet.from_raw(t) for n, t in enumerate(timeline) if n < limit
     ]
     ctx.obj['db'].add_all(*tweets)
 

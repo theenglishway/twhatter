@@ -1,8 +1,7 @@
 from datetime import datetime
 
 from bs4 import BeautifulSoup
-from dataclasses import dataclass, fields, InitVar, field
-from typing import List
+from dataclasses import dataclass, fields, InitVar
 
 from .mixins import ExtractableMixin
 

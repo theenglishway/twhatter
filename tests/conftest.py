@@ -4,7 +4,7 @@ from datetime import datetime
 from click.testing import CliRunner
 from bs4 import BeautifulSoup
 
-from twhatter.api import ApiUser
+from twhatter.client import ClientTimeline
 from twhatter.parser import tweet_factory
 from typing import NamedTuple, List
 
@@ -117,7 +117,7 @@ def tweet_collection():
 @pytest.fixture(scope="session")
 def raw_html_user_initial_page_factory():
     def _raw_html_user_initial_page(user):
-        a = ApiUser(user)
+        a = ClientTimeline(user)
         response = a.get_initial()
         return BeautifulSoup(response.text, "lxml")
     return _raw_html_user_initial_page

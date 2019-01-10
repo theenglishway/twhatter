@@ -1,9 +1,9 @@
-from twhatter.api import ApiUser
+from twhatter.client import ClientTimeline
 from twhatter.output import Print
 
 
 user = "the_english_way"
-a = ApiUser(user)
+timeline = ClientTimeline(user)
 
-for t in a.iter_tweets():
+for t in timeline:
     Print(t)()

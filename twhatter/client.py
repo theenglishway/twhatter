@@ -6,7 +6,7 @@ from twhatter.parser import TweetList
 import json
 
 
-class Api():
+class Client():
     HEADERS_LIST = [
         'Mozilla/5.0 (Windows; U; Windows NT 6.1; x64; fr; rv:1.9.2.13) Gecko/20101203 Firebird/3.6.13',
         'Mozilla/5.0 (compatible, MSIE 11, Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko',
@@ -15,14 +15,9 @@ class Api():
         'Mozilla/5.0 (Windows NT 5.2; RW; rv:7.0a1) Gecko/20091211 SeaMonkey/9.23a1pre'
     ]
 
-    def get_initial(self):
-        raise NotImplementedError()
 
-    def get_more_tweets(self):
-        raise NotImplementedError()
-
-
-class ApiUser(Api):
+class ClientTimeline(Client):
+    """Access and explore some user's timeline"""
     def __init__(self, user, limit=100):
         self.user = user
         self.earliest_tweet = None
@@ -47,7 +42,7 @@ class ApiUser(Api):
             headers={'User-Agent': choice(self.HEADERS_LIST)}
         )
 
-    def iter_tweets(self):
+    def __iter__(self):
         tweets = self.get_initial()
         soup = BeautifulSoup(tweets.text, "lxml")
         t_list = TweetList(soup)
