@@ -6,13 +6,19 @@ from dataclasses import dataclass, fields, InitVar, field
 
 @dataclass
 class Tweet:
+    #: Tweet ID
     id: int
+    #: Handle of the tweet's original author
+    screen_name: str
+    #: ID of the tweet's original author
+    user_id: int
     timestamp: datetime
-    user: str
     replies: int
     retweets: int
     likes: int
     text: str = field(repr=False)
+    #: Handle of the tweet's retweeter
+    retweeter: str = None
     soup: InitVar[BeautifulSoup] = None
 
     def __post_init__(self, soup):
@@ -27,12 +33,30 @@ class Tweet:
         )
 
     @staticmethod
+    def _extract_from_div_tweet(soup, data_kw):
+        kw = "data-{}".format(data_kw)
+        return(
+            soup.find('div', class_='tweet', attrs={kw: True})[kw]
+        )
+
+    @staticmethod
     def extract_id(soup):
         return int(soup['data-item-id'])
 
-    @staticmethod
-    def extract_user(soup):
-        return soup.find('span', 'username').text
+    @classmethod
+    def extract_screen_name(cls, soup):
+        return cls._extract_from_div_tweet(soup, 'screen-name')
+
+    @classmethod
+    def extract_user_id(cls, soup):
+        return int(cls._extract_from_div_tweet(soup, 'user-id'))
+
+    @classmethod
+    def extract_retweeter(cls, soup):
+        try:
+            return cls._extract_from_div_tweet(soup, 'retweeter')
+        except TypeError:
+            return None
 
     @staticmethod
     def extract_timestamp(soup):
