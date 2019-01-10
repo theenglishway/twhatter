@@ -20,11 +20,21 @@ class Tweet:
     likes_nb: int
     #: Timestamp of the original tweet
     timestamp: datetime
-
+    #: Permalink to the original tweet
+    permalink: str
+    #: Text of the tweet
     text: str = field(repr=False)
 
     #: Handle of the tweet's retweeter
     retweeter: str = None
+    #: Id of the retweet
+    retweet_id: int = None
+
+    #: Id of the tweet that the tweet is in reaction to
+    reacted_id: int = None
+    #: Id of the user that the tweet is in reaction to
+    reacted_user_id: int = None
+
     #: The soup extracted from the raw HTML
     soup: InitVar[BeautifulSoup] = None
 
@@ -39,11 +49,15 @@ class Tweet:
             [data_kw]
         )
 
+    @classmethod
+    def _extract_from_div_tweet(cls, soup, data_kw):
+        return cls._extract_from_div(soup, 'tweet', data_kw)
+
     @staticmethod
-    def _extract_from_div_tweet(soup, data_kw):
+    def _extract_from_div(soup, div_class, data_kw):
         kw = "data-{}".format(data_kw)
         return(
-            soup.find('div', class_='tweet', attrs={kw: True})[kw]
+            soup.find('div', class_=div_class, attrs={kw: True})[kw]
         )
 
     @staticmethod
@@ -65,11 +79,36 @@ class Tweet:
         except TypeError:
             return None
 
+    @classmethod
+    def extract_retweet_id(cls, soup):
+        try:
+            return int(cls._extract_from_div_tweet(soup, 'retweet-id'))
+        except TypeError:
+            return None
+
+    @classmethod
+    def extract_reacted_id(cls, soup):
+        try:
+            return int(cls._extract_from_div(soup, 'QuoteTweet-innerContainer', 'item-id'))
+        except TypeError:
+            return None
+
+    @classmethod
+    def extract_reacted_user_id(cls, soup):
+        try:
+            return int(cls._extract_from_div(soup, 'QuoteTweet-innerContainer', 'user-id'))
+        except TypeError:
+            return None
+
     @staticmethod
     def extract_timestamp(soup):
         return datetime.utcfromtimestamp(
             int(soup.find('span', attrs={'data-time': True})['data-time'])
         )
+
+    @classmethod
+    def extract_permalink(cls, soup):
+        return cls._extract_from_div_tweet(soup, 'permalink-path')
 
     @staticmethod
     def extract_fullname(soup):

@@ -32,12 +32,16 @@ class TweetInfo(NamedTuple):
     id: int
     screen_name: str
     user_id: int
+    permalink: str
     timestamp: datetime = None
     text: str = None
     comments_nb: int = None
     retweets_nb: int = None
     likes_nb: int = None
     retweeter: str = None
+    retweet_id: int = None
+    reacted_id: int = None
+    reacted_user_id: int = None
 
 @pytest.fixture(scope="session")
 def tweet_collection():
@@ -47,6 +51,7 @@ def tweet_collection():
             screen_name="the_english_way",
             user_id=943804775942033408,
             timestamp=datetime.utcfromtimestamp(1545811618),
+            permalink="/the_english_way/status/1077838164813848576",
             text="""Ca y est j'ai un pipeline Concourse avec un job qui builde une image @Docker qui affiche un "Hello World" dans un autre job \o/
 ........... je suis pas sûr de savoir ce que ça veut dire, mais en tout cas c'était mon objectif de la matinée """
         ),
@@ -54,25 +59,32 @@ def tweet_collection():
             id=1078281840945963008,
             screen_name="the_english_way",
             user_id=943804775942033408,
-            timestamp=datetime.utcfromtimestamp(1545917399)
+            timestamp=datetime.utcfromtimestamp(1545917399),
+            permalink="/the_english_way/status/1078281840945963008",
+            reacted_id=1078277316193726464,
+            reacted_user_id=19976004
         ),
         'with_link': TweetInfo(
             id=1077505613079429120,
             screen_name="the_english_way",
             user_id=943804775942033408,
-            timestamp=datetime.utcfromtimestamp(1545732331)
+            timestamp=datetime.utcfromtimestamp(1545732331),
+            permalink="/the_english_way/status/1077505613079429120"
         ),
         'retweet': TweetInfo(
             id=1055037291108974592,
             screen_name="Senficon",
             user_id=14861745,
             retweeter="the_english_way",
-            timestamp=datetime.utcfromtimestamp(1540375466)
+            retweet_id=1055098556300828672,
+            timestamp=datetime.utcfromtimestamp(1540375466),
+            permalink="/Senficon/status/1055037291108974592"
         ),
         'stats': TweetInfo(
             id=1039969574555471873,
             screen_name="BurgerQuizOff",
             user_id=949604705772228608,
+            permalink="/BurgerQuizOff/status/1039969574555471873",
             retweeter="the_english_way",
             comments_nb=12,
             retweets_nb=176,
