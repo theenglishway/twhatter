@@ -35,6 +35,9 @@ class Tweet:
     #: Id of the user that the tweet is in reaction to
     reacted_user_id: int = None
 
+    #: Link contained within the tweet
+    link_to: str = None
+
     #: The soup extracted from the raw HTML
     soup: InitVar[BeautifulSoup] = None
 
@@ -100,6 +103,13 @@ class Tweet:
         except TypeError:
             return None
 
+    @classmethod
+    def extract_link_to(cls, soup):
+        try:
+            return cls._extract_from_div(soup, 'card-type-summary', 'card-url')
+        except TypeError:
+            return None
+
     @staticmethod
     def extract_timestamp(soup):
         return datetime.utcfromtimestamp(
@@ -141,12 +151,6 @@ class Tweet:
     @staticmethod
     def extract_text(soup):
         return soup.find('p', 'tweet-text').text
-
-    @staticmethod
-    def extract_quoted_tweet(soup):
-        return int(soup.find(
-            'span', 'QuoteTweet-innerContainer').find(
-                'span', 'ProfileTweet-actionCount')['data-tweet-stat-count']),
 
     @staticmethod
     def extract_soup(soup):

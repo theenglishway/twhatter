@@ -42,6 +42,7 @@ class TweetInfo(NamedTuple):
     retweet_id: int = None
     reacted_id: int = None
     reacted_user_id: int = None
+    link_to: str = None
 
 @pytest.fixture(scope="session")
 def tweet_collection():
@@ -69,7 +70,8 @@ def tweet_collection():
             screen_name="the_english_way",
             user_id=943804775942033408,
             timestamp=datetime.utcfromtimestamp(1545732331),
-            permalink="/the_english_way/status/1077505613079429120"
+            permalink="/the_english_way/status/1077505613079429120",
+            link_to="https://t.co/el5VJucLRz"
         ),
         'retweet': TweetInfo(
             id=1055037291108974592,
