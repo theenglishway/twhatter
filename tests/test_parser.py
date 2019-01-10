@@ -19,6 +19,7 @@ class TestTweet:
         "reaction_tweet",
         "with_link",
         "retweet",
+        "hashtags",
         "stats",
     ])
     def test_plain_tweet(self, raw_tweet_factory, tweet_collection, tweet_type):

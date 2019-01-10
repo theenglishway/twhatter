@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 
 from twhatter.api import ApiUser
 from twhatter.parser import TweetList
-from typing import NamedTuple
+from typing import NamedTuple, List
 
 @pytest.fixture
 def cli_runner():
@@ -38,6 +38,7 @@ class TweetInfo(NamedTuple):
     comments_nb: int = None
     retweets_nb: int = None
     likes_nb: int = None
+    hashtag_list: List[str] = None
     retweeter: str = None
     retweet_id: int = None
     reacted_id: int = None
@@ -80,7 +81,15 @@ def tweet_collection():
             retweeter="the_english_way",
             retweet_id=1055098556300828672,
             timestamp=datetime.utcfromtimestamp(1540375466),
-            permalink="/Senficon/status/1055037291108974592"
+            permalink="/Senficon/status/1055037291108974592",
+        ),
+        'hashtags': TweetInfo(
+            id=1039969574555471873,
+            screen_name="BurgerQuizOff",
+            user_id=949604705772228608,
+            retweeter="the_english_way",
+            permalink="/BurgerQuizOff/status/1039969574555471873",
+            hashtag_list=["Nuggets", "BurgerQuiz", "PrivacyMonCul"]
         ),
         'stats': TweetInfo(
             id=1039969574555471873,

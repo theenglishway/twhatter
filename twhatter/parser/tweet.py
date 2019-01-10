@@ -2,6 +2,7 @@ from datetime import datetime
 
 from bs4 import BeautifulSoup
 from dataclasses import dataclass, fields, InitVar, field
+from typing import List
 
 
 @dataclass
@@ -24,6 +25,8 @@ class Tweet:
     permalink: str
     #: Text of the tweet
     text: str = field(repr=False)
+    #: List of hashtags in the tweet
+    hashtag_list: List[str]
 
     #: Handle of the tweet's retweeter
     retweeter: str = None
@@ -147,6 +150,13 @@ class Tweet:
             'ProfileTweet-action--favorite',
             'data-tweet-stat-count'
         ))
+
+    @staticmethod
+    def extract_hashtag_list(soup):
+        return [
+            link.b.text
+            for link in soup.find_all('a', class_="twitter-hashtag")
+        ]
 
     @staticmethod
     def extract_text(soup):
