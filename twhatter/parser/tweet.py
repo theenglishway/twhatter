@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 
 from bs4 import BeautifulSoup
@@ -6,6 +7,9 @@ from typing import List
 
 from .mixins import ExtractableMixin
 from .media import MediaBase, media_factory
+
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -234,7 +238,9 @@ class TweetList:
             # Don't know what this u-dir stuff is about but if it's in there,
             # it's not a tweet !
             if not tweet.find_all('p', class_="u-dir"):
-                yield tweet_factory(tweet)
+                t = tweet_factory(tweet)
+                logger.debug("Parsed tweet {}".format(t))
+                yield t
 
     def __len__(self):
         return len(self.raw_tweets)

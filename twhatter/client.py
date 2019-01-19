@@ -4,6 +4,10 @@ from user_agent import generate_user_agent
 
 from twhatter.parser import TweetList, user_factory
 import json
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 class Client():
@@ -11,6 +15,7 @@ class Client():
 
     @classmethod
     def get_user_timeline(cls, user_handle):
+        logger.info("Loading initial timeline for {}".format(user_handle))
         url = "https://twitter.com/{}".format(user_handle)
         return requests.get(
             url,
@@ -29,7 +34,14 @@ class ClientTimeline(Client):
         self.nb_tweets = 0
         self.limit = limit
 
+    def _update_state(self, earliest_tweet):
+        self.earliest_tweet = earliest_tweet.id
+        self.nb_tweets += 1
+
     def get_more_tweets(self):
+        logger.info(
+            "Loading more tweets from {} ({})".format(self.user, self.nb_tweets)
+        )
         return requests.get(
             "https://twitter.com/i/profiles/show/{}/timeline/tweets".format(self.user),
             params= dict(
@@ -48,8 +60,7 @@ class ClientTimeline(Client):
 
         for t in t_list:
             yield t
-            self.earliest_tweet = t.id
-            self.nb_tweets += 1
+            self._update_state(t)
 
         while True and self.nb_tweets < self.limit:
             more_tweets = self.get_more_tweets()
@@ -62,8 +73,7 @@ class ClientTimeline(Client):
 
             for t in t_list:
                 yield t
-                self.earliest_tweet = t.id
-                self.nb_tweets += 1
+                self._update_state(t)
 
 
 class ClientProfile(Client):

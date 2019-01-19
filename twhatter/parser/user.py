@@ -1,9 +1,13 @@
+import logging
 from datetime import datetime
 
 from bs4 import BeautifulSoup
 from dataclasses import dataclass, fields, InitVar
 
 from .mixins import ExtractableMixin
+
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -71,4 +75,6 @@ def user_factory(soup: BeautifulSoup) -> User:
     kwargs = {
         f.name: User._extract_value(soup, f) for f in fields(User)
     }
-    return User(**kwargs)
+    u = User(**kwargs)
+    logger.debug("Parsed user {}".format(u))
+    return u

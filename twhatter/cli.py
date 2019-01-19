@@ -7,11 +7,16 @@ import IPython
 
 from twhatter.client import ClientTimeline, ClientProfile
 from twhatter.output.sqlalchemy import Database, Tweet, User
+from twhatter.log import log_setup
 
 
 @click.group()
+@click.option('-v', '--verbosity',
+              type=click.Choice(['none', 'info', 'debug', 'verbose']),
+              default='info', show_default=True)
 @click.pass_context
-def main(ctx):
+def main(ctx, verbosity):
+    log_setup(verbosity)
     ctx.ensure_object(dict)
 
 

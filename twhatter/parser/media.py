@@ -1,10 +1,13 @@
-from datetime import datetime
+import logging
 
 from bs4 import BeautifulSoup
 from dataclasses import dataclass, fields, InitVar, field
 from typing import List, Optional
 
 from .mixins import ExtractableMixin
+
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -29,8 +32,6 @@ class MediaBase(ExtractableMixin):
     #: The soup extracted from the raw HTML
     soup: InitVar[BeautifulSoup] = None
 
-    #https: // pbs.twimg.com / media / DxNof6AXQAAu2oU.jpg
-
 
 class MediaImage(MediaBase):
     @staticmethod
@@ -51,7 +52,9 @@ def media_factory(soup: BeautifulSoup) -> Optional[MediaBase]:
     for kls in MediaBase.__subclasses__():
         try:
             if kls.condition(kwargs):
-                return kls(soup=soup, **kwargs)
+                m = kls(soup=soup, **kwargs)
+                logger.debug("Parsed media {}".format(m))
+                return m
         except NotImplementedError:
             continue
 
