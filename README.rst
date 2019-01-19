@@ -2,27 +2,55 @@
 Twhatter
 ========
 
+A simple Python scraper for Twitter.
 
-A simple scraper for Twitter
+Motivation
+----------
+
+Twitter's API `terms and conditions <https://developer.twitter.com/en/developer-terms/agreement-and-policy.html>`_
+have become very demanding in May 2018. Inspired by other attempts, I have
+put together yet another twitter scraper that uses a simple HTTP client instead
+of the developer API, and allows retrieving any data that can be accessed in an
+anonymous browsing session.
+
+This is mostly an attempt for me to produce some clean, functional and
+maintainable Python code. I have especially focused on a clean separation
+between data retrieval and output, which should allow to export data in any
+format.
+
+And why that terrible name ? Simple, "WHAT's going on TWITTER ?" => TWHATTER !
+
+Features
+--------
+
+At the moment, this utility only provides a command-line to interact with it.
+
+Anonymous client
+****************
+
+- Get any user's full timeline.
+- Get any user's profile data.
+
+Data output
+***********
+
+All scraped information can either be displayed on the terminal or stored into
+a local database.
 
 Installation
 ------------
 
-Installation requires Python >= 3.6.
-
-..highlight: shell
+Installation requires Python >= 3.6. ::
 
     $ pip install --user git+https://code.theenglishway.eu/theenglishway-corp/twhatter
 
 You then have to ensure that `~/.local/bin` in your `$PATH` or call
 `~/.local/bin/twhatter` instead of `twhatter` in the following examples
 
-Use
----
+Usage
+-----
 
-Display some user's tweets
-
-..highlight: shell
+Display some user's tweets ::
 
     $ twhatter timeline realDonaldTrump --limit 10
     <TweetTextOnly (id=1083404900862545920, date=2019-01-10 16:47:11, likes=32033, likes=11087, likes=6935)>
@@ -36,26 +64,18 @@ Display some user's tweets
     <TweetRetweet (id=1083049664021233664, date=2019-01-09 17:15:36, likes=64770, likes=21099, likes=7818)>
     <TweetRetweet (id=1083148367184781312, date=2019-01-09 23:47:49, likes=75514, likes=21966, likes=6145)>
 
-Display their profile information
-
-..highlight: shell
+Display their profile information ::
 
     $ twhatter profile realDonaldTrump
     User(id=25073877, screen_name='Donald J. Trump', join_date=datetime.datetime(2009, 3, 18, 0, 0), tweets_nb=40183, following_nb=45, followers_nb=57144827, likes_nb=7)
 
-Put them into a local database (by default in /tmp/db.sqlite)
-
-..highlight: shell
+Put them into a local database (by default in /tmp/db.sqlite) ::
 
     $ twhatter db timeline realDonaldTrump
 
-Open a session on the local database and make queries with SQLAlchemy
-
-..highlight: shell
+Open a session on the local database and make queries with SQLAlchemy ::
 
     $ twhatter db shell
-
-..highlight: python
 
     In [1]: session.query(Tweet).all()
     Out[1]:
@@ -65,3 +85,29 @@ Open a session on the local database and make queries with SQLAlchemy
      <Tweet (id=1026373195790802949),
      <Tweet (id=1026482814164844544),
      <Tweet (id=1027797734613504001)]
+
+Tests
+-----
+
+Unit tests are provided. From the root directory in a freshly-cloned repository
+and with a clean virtual environment, they can be run with ::
+
+    $ pytest
+
+Useful links
+------------
+
+* `Raymond Hettinger's excellent talk about Python 3.7's Dataclasses <https://www.youtube.com/watch?v=T-TwcmT6Rcw>`_
+
+Other scrapers that might fit your needs
+****************************************
+
+In Python :
+
+* `twint <https://github.com/twintproject/twint>`_
+* `twitterscraper <https://github.com/taspinar/twitterscraper>`_
+* `twitter-scraper <https://github.com/kennethreitz/twitter-scraper>`_
+
+In Javascript:
+
+* `scrape-twitter <https://github.com/sebinsua/scrape-twitter>`_
