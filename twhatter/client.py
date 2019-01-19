@@ -61,6 +61,8 @@ class ClientTimeline(Client):
         for t in t_list:
             yield t
             self._update_state(t)
+            if self.nb_tweets >= self.limit:
+                break
 
         while True and self.nb_tweets < self.limit:
             more_tweets = self.get_more_tweets()

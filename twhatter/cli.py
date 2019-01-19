@@ -25,12 +25,9 @@ def main(ctx, verbosity):
 @click.argument('user')
 def timeline(limit, user):
     """Get some user's Tweets"""
-    timeline = ClientTimeline(user)
+    timeline = ClientTimeline(user, limit)
 
-    for n, t in enumerate(timeline):
-        if n >= limit:
-            break
-
+    for t in timeline:
         click.echo(t)
 
 
@@ -55,7 +52,7 @@ def db(ctx, db_url):
 @click.pass_context
 def timeline(ctx, limit, user):
     """Push user's Tweets into a database"""
-    timeline = ClientTimeline(user)
+    timeline = ClientTimeline(user, limit)
 
     tweets = [
         Tweet.from_raw(t) for n, t in enumerate(timeline) if n < limit

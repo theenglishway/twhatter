@@ -26,7 +26,10 @@ class TestMain:
         )
         assert result.exit_code == 0
 
-        lines = result.output.split('\n')[:-1]
+        # Remove log lines
+        lines = [
+            l for l in result.output.split('\n')[:-1] if "twhatter" not in l
+        ]
         assert len(lines) == 100
 
         for l in lines:
@@ -40,7 +43,10 @@ class TestMain:
         )
         assert result.exit_code == 0
 
-        lines = result.output.split('\n')[:-1]
+        # Remove log lines
+        lines = [
+            l for l in result.output.split('\n')[:-1] if "twhatter" not in l
+        ]
         assert len(lines) == tweet_limit
 
     @pytest.mark.send_request
