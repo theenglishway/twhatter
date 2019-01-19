@@ -6,6 +6,7 @@ import click
 import IPython
 
 from twhatter.client import ClientTimeline, ClientProfile
+from twhatter.output import Print
 from twhatter.output.sqlalchemy import Database, Tweet, User
 from twhatter.log import log_setup
 
@@ -18,25 +19,24 @@ from twhatter.log import log_setup
 def main(ctx, verbosity):
     log_setup(verbosity)
     ctx.ensure_object(dict)
+    ctx.obj['stdout'] = Print()
 
 
 @main.command()
 @click.option('-l', '--limit', type=int, default=100, show_default=True)
 @click.argument('user')
-def timeline(limit, user):
+@click.pass_context
+def timeline(ctx, limit, user):
     """Get some user's Tweets"""
-    timeline = ClientTimeline(user, limit)
-
-    for t in timeline:
-        click.echo(t)
+    ctx.obj['stdout'].output_tweets(user, limit)
 
 
 @main.command()
 @click.argument('user')
-def profile(user):
+@click.pass_context
+def profile(ctx, user):
     """Get basic info about some user"""
-    p = ClientProfile(user)
-    click.echo(p.user)
+    ctx.obj['stdout'].output_user(user)
 
 
 @main.group()
@@ -52,17 +52,7 @@ def db(ctx, db_url):
 @click.pass_context
 def timeline(ctx, limit, user):
     """Push user's Tweets into a database"""
-    timeline = ClientTimeline(user, limit)
-
-    tweets = [
-        Tweet.from_raw(t) for n, t in enumerate(timeline) if n < limit
-    ]
-    profiles = set()
-    for t in timeline:
-        p = ClientProfile(t.screen_name)
-        profiles.add(p)
-    users = [User.from_raw(p.user) for p in profiles]
-    ctx.obj['db'].add_all(*users, *tweets)
+    ctx.obj['db'].output_tweets(user, limit)
 
 
 @db.command()
@@ -70,9 +60,7 @@ def timeline(ctx, limit, user):
 @click.pass_context
 def profile(ctx, user):
     """Push some user into a database"""
-    p = ClientProfile(user)
-
-    ctx.obj['db'].add_all(User.from_raw(p.user))
+    ctx.obj['db'].output_user(user)
 
 
 @db.command()

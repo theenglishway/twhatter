@@ -1,6 +1,14 @@
-class Print:
-    def __init__(self, tweet):
-        self.tweet = tweet
+from .base import OutputBase
+from twhatter.client import ClientTimeline, ClientProfile
 
-    def __call__(self, *args, **kwargs):
-        print(self.tweet)
+
+class Print(OutputBase):
+    def output_tweets(self, user, limit):
+        client_timeline = ClientTimeline(user, limit)
+
+        for t in client_timeline:
+            print(t)
+
+    def output_user(self, user):
+        p = ClientProfile(user)
+        print(p.user)

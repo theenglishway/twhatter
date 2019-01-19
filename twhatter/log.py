@@ -27,6 +27,7 @@ LOGGING = {
 
 def log_setup(verbosity):
     logging.getLogger('urllib3').setLevel(logging.WARNING)
+    logging.getLogger('parso').setLevel(logging.WARNING)
 
     if verbosity == 'verbose':
         logging.getLogger('twhatter.client').setLevel(logging.DEBUG)
