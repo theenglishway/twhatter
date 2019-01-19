@@ -57,7 +57,12 @@ def timeline(ctx, limit, user):
     tweets = [
         Tweet.from_raw(t) for n, t in enumerate(timeline) if n < limit
     ]
-    ctx.obj['db'].add_all(*tweets)
+    profiles = set()
+    for t in timeline:
+        p = ClientProfile(t.screen_name)
+        profiles.add(p)
+    users = [User.from_raw(p.user) for p in profiles]
+    ctx.obj['db'].add_all(*users, *tweets)
 
 
 @db.command()

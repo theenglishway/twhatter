@@ -23,6 +23,7 @@ class Tweet(Base):
     _mention_list = Column(String)
 
     user = relationship('User', backref='tweets')
+    #media = relationship('Media', backref='tweets')
 
     @hybrid_property
     def hashtag_list(self):
@@ -60,7 +61,8 @@ class Tweet(Base):
                 'retweeter', 'retweet_id',
                 'reacted_id', 'reacted_user_id',
                 'link_to', 'soup',
-                'hashtag_list', 'mention_list'
+                'hashtag_list', 'mention_list',
+                'media'
             ]
         }
         return cls(**kwargs)
