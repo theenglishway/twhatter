@@ -22,6 +22,7 @@ class TestTweet:
         "hashtags",
         "mentions",
         "stats",
+        "media",
     ]
 
     @pytest.mark.parametrize("tweet_type", all_types)
@@ -34,7 +35,7 @@ class TestTweet:
             # of them, the expected values are not set on purpose and therefore
             # not tested
             if value is not None:
-                assert getattr(t, field) == value
+                assert value == getattr(t, field)
 
     @pytest.mark.parametrize("tweet_type,expected_class", [
         ('plain', TweetTextOnly),
@@ -46,6 +47,12 @@ class TestTweet:
         t, tweet_info = tweet_test_data_factory(tweet_type)
         assert isinstance(t, expected_class)
 
+    @pytest.mark.parametrize("media_type,expected_class", [
+        ('media', MediaImage),
+    ])
+    def test_media_type(self, tweet_test_data_factory, media_type, expected_class):
+        t, tweet_info = tweet_test_data_factory(media_type)
+        assert isinstance(t.media, expected_class)
 
 class TestUser:
     all_handles = [
@@ -65,4 +72,4 @@ class TestUser:
             # of them, the expected values are not set on purpose and therefore
             # not tested
             if value is not None:
-                assert getattr(user, field) == value
+                assert value == getattr(user, field)

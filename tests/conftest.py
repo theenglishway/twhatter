@@ -8,6 +8,8 @@ from twhatter.client import ClientTimeline
 from twhatter.parser import tweet_factory
 from typing import NamedTuple, List
 
+from twhatter.parser.media import MediaBase
+
 @pytest.fixture
 def cli_runner():
     """Runner for Click"""
@@ -31,6 +33,15 @@ def tweet_limit():
 # Fixtures for extraction of specific tweets of several kinds, whose author
 # and id are known in advance
 
+class MediaInfo(NamedTuple):
+    """Class to hold information about a media that is already known"""
+    image_links: List[str] = []
+
+    def __eq__(self, other):
+        """Override of __eq__ to check against `MediaBase` instance"""
+        return (isinstance(other, MediaBase)
+                and other.image_links == self.image_links)
+
 
 class TweetInfo(NamedTuple):
     """Class to hold information about a tweet that is already known"""
@@ -50,6 +61,7 @@ class TweetInfo(NamedTuple):
     reacted_id: int = None
     reacted_user_id: int = None
     link_to: str = None
+    media: MediaInfo = None
 
 
 @pytest.fixture(scope="session")
@@ -114,7 +126,16 @@ def tweet_collection():
             retweeter="the_english_way",
             comments_nb=12,
             retweets_nb=176,
-            likes_nb=556
+            likes_nb=555
+        ),
+        'media':TweetInfo(
+            id=1086327536726900736,
+            screen_name="the_english_way",
+            user_id=943804775942033408,
+            permalink="/the_english_way/status/1086327536726900736",
+            media=MediaInfo(
+                image_links=["https://pbs.twimg.com/media/DxNof6AXQAAu2oU.jpg"]
+            )
         ),
     }
 
@@ -172,7 +193,7 @@ def user_collection():
             screen_name="Marlene Hansen",
             join_date=datetime(2011, 5, 8, 0, 0),
             tweets_nb=25,
-            following_nb=344,
+            following_nb=342,
             followers_nb=81,
             likes_nb=4
         ),

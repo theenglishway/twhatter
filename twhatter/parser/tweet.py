@@ -5,6 +5,7 @@ from dataclasses import dataclass, fields, InitVar, field
 from typing import List
 
 from .mixins import ExtractableMixin
+from .media import MediaBase, media_factory
 
 
 @dataclass
@@ -44,6 +45,9 @@ class TweetBase(ExtractableMixin):
 
     #: Link contained within the tweet
     link_to: str = None
+
+    #: Media that the tweet contains
+    media: MediaBase = None
 
     #: The soup extracted from the raw HTML
     soup: InitVar[BeautifulSoup] = None
@@ -171,6 +175,10 @@ class TweetBase(ExtractableMixin):
     @staticmethod
     def extract_text(soup):
         return soup.find('p', 'tweet-text').text
+
+    @staticmethod
+    def extract_media(soup):
+        return media_factory(soup.find('div', 'AdaptiveMedia'))
 
 
 class TweetTextOnly(TweetBase):
