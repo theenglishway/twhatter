@@ -5,9 +5,8 @@
 import click
 import IPython
 
-from twhatter.client import ClientTimeline, ClientProfile
-from twhatter.output import Print, Json
-from twhatter.output.sqlalchemy import Database, Tweet, User
+from twhatter.output import Print, Json, Database
+from twhatter.output.sqlalchemy import Tweet, User
 from twhatter.log import log_setup
 
 
@@ -19,8 +18,21 @@ from twhatter.log import log_setup
 def main(ctx, verbosity):
     log_setup(verbosity)
     ctx.ensure_object(dict)
-    ctx.obj['stdout'] = Print()
+    ctx.obj['output'] = Print()
 
+
+@main.group()
+@click.option('-d', '--db_url', type=str, default="sqlite:////tmp/db.sqlite3", show_default=True)
+@click.pass_context
+def db(ctx, db_url):
+    ctx.obj['output'] = Database(db_url)
+
+
+@main.group()
+@click.option('-f', '--json_file', type=str, default="/tmp/output.json", show_default=True)
+@click.pass_context
+def json(ctx, json_file):
+    ctx.obj['output'] = Json(json_file)
 
 @main.command()
 @click.option('-l', '--limit', type=int, default=100, show_default=True)
@@ -28,77 +40,36 @@ def main(ctx, verbosity):
 @click.pass_context
 def timeline(ctx, limit, user):
     """Get some user's Tweets"""
-    ctx.obj['stdout'].output_tweets(user, limit)
-
+    ctx.obj['output'].output_tweets(user, limit)
 
 @main.command()
 @click.argument('user')
 @click.pass_context
 def profile(ctx, user):
     """Get basic info about some user"""
-    ctx.obj['stdout'].output_user(user)
-
-
-@main.group()
-@click.option('-d', '--db_url', type=str, default="sqlite:////tmp/db.sqlite3", show_default=True)
-@click.pass_context
-def db(ctx, db_url):
-    ctx.obj['db'] = Database(db_url)
-
-
-@db.command()
-@click.option('-l', '--limit', type=int, default=100, show_default=True)
-@click.argument('user')
-@click.pass_context
-def timeline(ctx, limit, user):
-    """Push user's Tweets into a database"""
-    ctx.obj['db'].output_tweets(user, limit)
-
-
-@db.command()
-@click.argument('user')
-@click.pass_context
-def profile(ctx, user):
-    """Push some user into a database"""
-    ctx.obj['db'].output_user(user)
+    ctx.obj['output'].output_user(user)
 
 
 @db.command()
 @click.pass_context
 def shell(ctx):
-    session = ctx.obj['db'].start()
+    session = ctx.obj['output'].start()
     user_ns = {
-        'db': ctx.obj['db'],
+        'db': ctx.obj['output'],
         'session': session,
         'Tweet': Tweet,
         'User': User
     }
     IPython.start_ipython(argv=[], user_ns=user_ns)
-    ctx.obj['db'].stop(session)
+    ctx.obj['output'].stop(session)
 
 
-@main.group()
-@click.option('-f', '--json_file', type=str, default="/tmp/output.json", show_default=True)
-@click.pass_context
-def json(ctx, json_file):
-    ctx.obj['json'] = Json(json_file)
+db.add_command(profile)
+db.add_command(timeline)
 
+json.add_command(profile)
+json.add_command(timeline)
 
-@json.command()
-@click.option('-l', '--limit', type=int, default=100, show_default=True)
-@click.argument('user')
-@click.pass_context
-def timeline(ctx, limit, user):
-    """Push user's Tweets into a database"""
-    ctx.obj['json'].output_tweets(user, limit)
-
-
-@json.command()
-@click.argument('user')
-@click.pass_context
-def profile(ctx, user):
-    """Push some user into a database"""
-    ctx.obj['json'].output_user(user)
 
 if __name__ == "__main__":
     main(obj={})
