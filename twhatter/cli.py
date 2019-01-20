@@ -6,7 +6,7 @@ import click
 import IPython
 
 from twhatter.client import ClientTimeline, ClientProfile
-from twhatter.output import Print
+from twhatter.output import Print, Json
 from twhatter.output.sqlalchemy import Database, Tweet, User
 from twhatter.log import log_setup
 
@@ -76,6 +76,29 @@ def shell(ctx):
     IPython.start_ipython(argv=[], user_ns=user_ns)
     ctx.obj['db'].stop(session)
 
+
+@main.group()
+@click.option('-f', '--json_file', type=str, default="/tmp/output.json", show_default=True)
+@click.pass_context
+def json(ctx, json_file):
+    ctx.obj['json'] = Json(json_file)
+
+
+@json.command()
+@click.option('-l', '--limit', type=int, default=100, show_default=True)
+@click.argument('user')
+@click.pass_context
+def timeline(ctx, limit, user):
+    """Push user's Tweets into a database"""
+    ctx.obj['json'].output_tweets(user, limit)
+
+
+@json.command()
+@click.argument('user')
+@click.pass_context
+def profile(ctx, user):
+    """Push some user into a database"""
+    ctx.obj['json'].output_user(user)
 
 if __name__ == "__main__":
     main(obj={})
