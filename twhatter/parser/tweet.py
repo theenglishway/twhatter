@@ -195,6 +195,14 @@ class TweetLink(TweetBase):
     def condition(kwargs):
         return kwargs['link_to']
 
+    def __repr__(self):
+        return ("<{0} "
+                "(id={1.id}, "
+                "date={1.timestamp}, "
+                "likes={1.likes_nb}, "
+                "retweets={1.retweets_nb}, "
+                "comments={1.comments_nb}, "
+                "link_to={1.link_to})>".format(self.__class__.__qualname__, self))
 
 class TweetRetweet(TweetBase):
     """A plain retweet"""
@@ -202,6 +210,15 @@ class TweetRetweet(TweetBase):
     def condition(kwargs):
         return kwargs['retweet_id']
 
+    def __repr__(self):
+        return ("<{0} "
+                "(id={1.id}, "
+                "date={1.timestamp}, "
+                "likes={1.likes_nb}, "
+                "retweets={1.retweets_nb}, "
+                "comments={1.comments_nb}, "
+                "retweeter={1.retweeter}, "
+                "retweet_id={1.retweet_id})>".format(self.__class__.__qualname__, self))
 
 class TweetReaction(TweetBase):
     """A reaction to another tweet"""
@@ -209,6 +226,15 @@ class TweetReaction(TweetBase):
     def condition(kwargs):
         return kwargs['reacted_id']
 
+    def __repr__(self):
+        return ("<{0} "
+                "(id={1.id}, "
+                "date={1.timestamp}, "
+                "likes={1.likes_nb}, "
+                "retweets={1.retweets_nb}, "
+                "comments={1.comments_nb}, "
+                "reacted_id={1.reacted_id}, "
+                "reacted_user_id={1.reacted_user_id})>".format(self.__class__.__qualname__, self))
 
 def tweet_factory(soup: BeautifulSoup) -> TweetBase:
     """
