@@ -1,0 +1,222 @@
+- !!python/object:twhatter.parser.user.User
+  followers_nb: 10
+  following_nb: 30
+  id: 943804775942033408
+  join_date: 2017-12-21 00:00:00
+  likes_nb: 17
+  screen_name: theenglishway
+  soup: null
+  tweets_nb: 83
+
+- !!python/object:twhatter.parser.tweet.TweetLink
+  comments_nb: 0
+  hashtag_list: [GrandDebat]
+  id: 1087059470621048836
+  likes_nb: 0
+  link_to: https://t.co/1u1pmVm2oI
+  media: null
+  mention_list: [596420812]
+  permalink: /the_english_way/status/1087059470621048836
+  reacted_id: null
+  reacted_user_id: null
+  retweet_id: null
+  retweeter: null
+  retweets_nb: 0
+  screen_name: the_english_way
+  soup: null
+  text: "Vu dans le dernier @canardenchaine, le remplacement dans 2 r\xE9gions de\
+    \ l'enqu\xEAte publique pour les projets environnementaux par une consultation\
+    \ par voie \xE9l\xE9ctronique \xE0 fins \"d'exp\xE9rimentation\". Le #GrandDebat\
+    \ avant l'heurehttps://www.lemoniteur.fr/article/suppression-de-l-enquete-publique-dans-le-cadre-de-l-autorisation-environnementale-donnez-votre-avis.2006719\_\
+    \u2026"
+  timestamp: 2019-01-20 18:49:09
+  user_id: 943804775942033408
+- !!python/object:twhatter.parser.tweet.TweetLink
+  comments_nb: 0
+  hashtag_list: [blog, AffaireBenalla]
+  id: 1085843193885851648
+  likes_nb: 1
+  link_to: https://t.co/05PluIG3Mp
+  media: null
+  mention_list: [155948847]
+  permalink: /the_english_way/status/1085843193885851648
+  reacted_id: null
+  reacted_user_id: null
+  retweet_id: null
+  retweeter: null
+  retweets_nb: 2
+  screen_name: the_english_way
+  soup: null
+  text: "Nouvel article sur mon #blog : un r\xE9sum\xE9 qui se veut objectif des auditions\
+    \ d'hier dans l'#AffaireBenalla (mais n'y parvient pas). Et un grand merci au\
+    \ @Senat de nous proposer des discussions d'une si grande qualit\xE9.https://blog.theenglishway.eu/fr/auditions-senat-0.html#auditions-senat-0\_\
+    \u2026"
+  timestamp: 2019-01-17 10:16:06
+  user_id: 943804775942033408
+- !!python/object:twhatter.parser.tweet.TweetLink
+  comments_nb: 2
+  hashtag_list: []
+  id: 1077505613079429120
+  likes_nb: 1
+  link_to: https://t.co/el5VJucLRz
+  media: null
+  mention_list: []
+  permalink: /the_english_way/status/1077505613079429120
+  reacted_id: null
+  reacted_user_id: null
+  retweet_id: null
+  retweeter: null
+  retweets_nb: 1
+  screen_name: the_english_way
+  soup: null
+  text: "Le p\xE8re No\xEBl, un bon exemple de socialisme compar\xE9 \xE0 la petite\
+    \ souris ou \xE0 Halloween ? :Dhttps://jacobinmag.com/2018/12/santa-claus-socialism-christmas\_\
+    \u2026"
+  timestamp: 2018-12-25 10:05:31
+  user_id: 943804775942033408
+- !!python/object:twhatter.parser.tweet.TweetLink
+  comments_nb: 0
+  hashtag_list: [blog]
+  id: 1060480082987356161
+  likes_nb: 0
+  link_to: https://t.co/kUgDRV2btD
+  media: null
+  mention_list: []
+  permalink: /the_english_way/status/1060480082987356161
+  reacted_id: null
+  reacted_user_id: null
+  retweet_id: null
+  retweeter: null
+  retweets_nb: 0
+  screen_name: the_english_way
+  soup: null
+  text: "Nouvel article sur mon #blog :https://blog.theenglishway.eu/la-gratuite.html#la-gratuite\_\
+    \u2026"
+  timestamp: 2018-11-08 10:32:09
+  user_id: 943804775942033408
+- !!python/object:twhatter.parser.tweet.TweetLink
+  comments_nb: 0
+  hashtag_list: []
+  id: 1052565222316285957
+  likes_nb: 0
+  link_to: https://t.co/y0ictRW5TM
+  media: null
+  mention_list: [106443426]
+  permalink: /the_english_way/status/1052565222316285957
+  reacted_id: null
+  reacted_user_id: null
+  retweet_id: null
+  retweeter: null
+  retweets_nb: 0
+  screen_name: the_english_way
+  soup: null
+  text: "Journal de bord, entr\xE9e #1 : http://blog.theenglishway.eu/log-001.html\_\
+    \n(ou aussi : @CCI_Paris_IdF c'est bien!)"
+  timestamp: 2018-10-17 14:21:19
+  user_id: 943804775942033408
+- !!python/object:twhatter.parser.tweet.TweetLink
+  comments_nb: 0
+  hashtag_list: [blog]
+  id: 1037399737480212480
+  likes_nb: 0
+  link_to: https://t.co/IE1XSeHyZV
+  media: null
+  mention_list: []
+  permalink: /the_english_way/status/1037399737480212480
+  reacted_id: null
+  reacted_user_id: null
+  retweet_id: null
+  retweeter: null
+  retweets_nb: 0
+  screen_name: the_english_way
+  soup: null
+  text: "Nouvel article sur mon #blog ! \nComment faire un business model qui claque,\
+    \ selon Wall Street, ou \"qu'est ce qui fait la valeur d'une boite selon les investisseurs\"\
+    \ :  http://blog.theenglishway.eu/business-model-wall-street.html\_\u2026  \n\
+    Il y a 10 crit\xE8res, le 6e vous surprendra !"
+  timestamp: 2018-09-05 17:59:06
+  user_id: 943804775942033408
+- !!python/object:twhatter.parser.tweet.TweetLink
+  comments_nb: 0
+  hashtag_list: [blog, functionalstupidity]
+  id: 1036172843065790466
+  likes_nb: 0
+  link_to: https://t.co/Nkl5wXUgyT
+  media: null
+  mention_list: [291129749]
+  permalink: /the_english_way/status/1036172843065790466
+  reacted_id: null
+  reacted_user_id: null
+  retweet_id: null
+  retweeter: null
+  retweets_nb: 0
+  screen_name: the_english_way
+  soup: null
+  text: "New article on my #blog : functional stupidity, or how our work-places drive\
+    \ us into stupidity (introducing Mats Alvesson and @andre_spicer 's book on #functionalstupidity)http://blog.theenglishway.eu/en/functional-stupidity-0.html\_\
+    \u2026"
+  timestamp: 2018-09-02 08:43:51
+  user_id: 943804775942033408
+- !!python/object:twhatter.parser.tweet.TweetLink
+  comments_nb: 0
+  hashtag_list: [blog]
+  id: 1036172317443989505
+  likes_nb: 1
+  link_to: https://t.co/2aA4v3fhgO
+  media: null
+  mention_list: [291129749]
+  permalink: /the_english_way/status/1036172317443989505
+  reacted_id: null
+  reacted_user_id: null
+  retweet_id: null
+  retweeter: null
+  retweets_nb: 0
+  screen_name: the_english_way
+  soup: null
+  text: "Nouvel article sur mon #blog : la stupidit\xE9 fonctionelle, ou comment nos\
+    \ environnements de travail nous poussent \xE0 la stupidit\xE9 (introduction au\
+    \ livre de Mats Alvesson & @andre_spicer)http://blog.theenglishway.eu/fr/functional-stupidity-0.html\_\
+    \u2026"
+  timestamp: 2018-09-02 08:41:46
+  user_id: 943804775942033408
+- !!python/object:twhatter.parser.tweet.TweetLink
+  comments_nb: 0
+  hashtag_list: []
+  id: 1028882171816275968
+  likes_nb: 0
+  link_to: https://t.co/jCDJSndUhC
+  media: null
+  mention_list: []
+  permalink: /the_english_way/status/1028882171816275968
+  reacted_id: null
+  reacted_user_id: null
+  retweet_id: null
+  retweeter: null
+  retweets_nb: 0
+  screen_name: the_english_way
+  soup: null
+  text: "Article miniature sur Alan Turing :http://blog.theenglishway.eu/alan-turing.html\_\
+    \u2026"
+  timestamp: 2018-08-13 05:53:20
+  user_id: 943804775942033408
+- !!python/object:twhatter.parser.tweet.TweetLink
+  comments_nb: 0
+  hashtag_list: [blog]
+  id: 1027798020174372865
+  likes_nb: 0
+  link_to: https://t.co/dgT75s80VJ
+  media: null
+  mention_list: [20404918]
+  permalink: /the_english_way/status/1027798020174372865
+  reacted_id: null
+  reacted_user_id: null
+  retweet_id: null
+  retweeter: null
+  retweets_nb: 0
+  screen_name: the_english_way
+  soup: null
+  text: "And now for something completely different ! First dive into @sqlalchemy\
+    \ #bloghttp://blog.theenglishway.eu/en/sqlalchemy-intro.html\_\u2026"
+  timestamp: 2018-08-10 06:05:18
+  user_id: 943804775942033408
+

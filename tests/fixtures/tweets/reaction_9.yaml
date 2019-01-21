@@ -1,0 +1,193 @@
+- !!python/object:twhatter.parser.tweet.TweetReaction
+  comments_nb: 350
+  hashtag_list: [ActeX]
+  id: 1086603899186880512
+  likes_nb: 3413
+  link_to: null
+  media: null
+  mention_list: [62747302]
+  permalink: /davduf/status/1086603899186880512
+  reacted_id: 1086556426074578945
+  reacted_user_id: 29955464
+  retweet_id: null
+  retweeter: null
+  retweets_nb: 2348
+  screen_name: davduf
+  soup: null
+  text: "La fatigue nerveuse, la pression, le renversement m\xE9diatique soudain,\
+    \ le d\xE9ni politique qui s'acharne, et puis les larmes. \n\nEt aujourd'hui,\
+    \ #ActeX.  Pas question de l\xE2cher @Place_Beauvau \n\nPour vos signalements:\
+    \ email ou DM circonstanci\xE9s svp  http://www.davduf.net/giletsjaunes-et-violencespolicieres-le\_\
+    \u2026https://twitter.com/arretsurimages/status/1086556426074578945\_\u2026"
+  timestamp: 2019-01-19 12:38:52
+  user_id: 12786782
+- !!python/object:twhatter.parser.tweet.TweetReaction
+  comments_nb: 111
+  hashtag_list: []
+  id: 1087111932560244736
+  likes_nb: 1006
+  link_to: null
+  media: null
+  mention_list: []
+  permalink: /davduf/status/1087111932560244736
+  reacted_id: 1087073778545246208
+  reacted_user_id: 338985020
+  retweet_id: null
+  retweeter: null
+  retweets_nb: 582
+  screen_name: davduf
+  soup: null
+  text: "\xABOn ne peut pas demander aux manifestants d'\xEAtre exemplaires si on\
+    \ ne l'est pas soi-m\xEAme \xBB, a estim\xE9 dimanche le porte-parole du gouvernement,\
+    \ Benjamin Griveaux, apr\xE8s la mise en cause de l'utilisation de lanceurs de\
+    \ balles de d\xE9fense (LBD) par la police.\n\nOn avance.https://twitter.com/afpfr/status/1087073778545246208\_\
+    \u2026"
+  timestamp: 2019-01-20 22:17:36
+  user_id: 12786782
+- !!python/object:twhatter.parser.tweet.TweetReaction
+  comments_nb: 16
+  hashtag_list: []
+  id: 1087053227227578369
+  likes_nb: 217
+  link_to: null
+  media: null
+  mention_list: [160534877]
+  permalink: /davduf/status/1087053227227578369
+  reacted_id: 1087043032350973958
+  reacted_user_id: 12786782
+  retweet_id: null
+  retweeter: null
+  retweets_nb: 201
+  screen_name: davduf
+  soup: null
+  text: "Rectificatif: les images sont sign\xE9es @ClementLanot (dont le travail est\
+    \ remarquable)  https://www.youtube.com/watch?v=fDugakictUw\_\u2026 ( \xE0 27mn11s)https://twitter.com/davduf/status/1087043032350973958\_\
+    \u2026"
+  timestamp: 2019-01-20 18:24:20
+  user_id: 12786782
+- !!python/object:twhatter.parser.tweet.TweetReaction
+  comments_nb: 39
+  hashtag_list: []
+  id: 1086946146398945281
+  likes_nb: 332
+  link_to: null
+  media: null
+  mention_list: [13353862]
+  permalink: /davduf/status/1086946146398945281
+  reacted_id: 1086879785530331141
+  reacted_user_id: 13353862
+  retweet_id: null
+  retweeter: null
+  retweets_nb: 100
+  screen_name: davduf
+  soup: null
+  text: "Les commentaires sur le fil Twitter de @LEXPRESS sont charmants comme un\
+    \ dimanche matin.https://twitter.com/LEXPRESS/status/1086879785530331141\_\u2026"
+  timestamp: 2019-01-20 11:18:50
+  user_id: 12786782
+- !!python/object:twhatter.parser.tweet.TweetReaction
+  comments_nb: 3
+  hashtag_list: [ActeX, Montepellier, LBD40]
+  id: 1086779719599747072
+  likes_nb: 103
+  link_to: null
+  media: null
+  mention_list: [62747302]
+  permalink: /davduf/status/1086779719599747072
+  reacted_id: 1086770685471531008
+  reacted_user_id: 2973410193
+  retweet_id: null
+  retweeter: null
+  retweets_nb: 158
+  screen_name: davduf
+  soup: null
+  text: "allo @Place_Beauvau - c'est pour un signalement - 325 (pr\xE9cisions)\n\n\
+    #ActeX #Montepellier #LBD40https://twitter.com/OctavieMrl/status/1086770685471531008\_\
+    \u2026"
+  timestamp: 2019-01-20 00:17:31
+  user_id: 12786782
+- !!python/object:twhatter.parser.tweet.TweetReaction
+  comments_nb: 5
+  hashtag_list: [ActeX, Montepellier, LBD40]
+  id: 1086779578918584321
+  likes_nb: 153
+  link_to: null
+  media: null
+  mention_list: [62747302]
+  permalink: /davduf/status/1086779578918584321
+  reacted_id: 1086774517647790080
+  reacted_user_id: 2973410193
+  retweet_id: null
+  retweeter: null
+  retweets_nb: 264
+  screen_name: davduf
+  soup: null
+  text: "allo @Place_Beauvau - c'est pour un signalement - 326 (pr\xE9cisions)\n\n\
+    #ActeX #Montepellier #LBD40https://twitter.com/OctavieMrl/status/1086774517647790080\_\
+    \u2026"
+  timestamp: 2019-01-20 00:16:57
+  user_id: 12786782
+- !!python/object:twhatter.parser.tweet.TweetReaction
+  comments_nb: 7
+  hashtag_list: [LBD40, Montepellier, ActeX]
+  id: 1086707919138234369
+  likes_nb: 154
+  link_to: null
+  media: null
+  mention_list: [62747302]
+  permalink: /davduf/status/1086707919138234369
+  reacted_id: 1086692368835923969
+  reacted_user_id: 2973410193
+  retweet_id: null
+  retweeter: null
+  retweets_nb: 264
+  screen_name: davduf
+  soup: null
+  text: "allo @Place_Beauvau - c'est pour un signalement - 331\n\nTir de #LBD40 dans\
+    \ les fesses\n\n#Montepellier, #ActeXhttps://twitter.com/OctavieMrl/status/1086692368835923969\_\
+    \u2026"
+  timestamp: 2019-01-19 19:32:12
+  user_id: 12786782
+- !!python/object:twhatter.parser.tweet.TweetReaction
+  comments_nb: 38
+  hashtag_list: [Rennes, ActeX]
+  id: 1086689891851882496
+  likes_nb: 840
+  link_to: null
+  media: null
+  mention_list: [62747302]
+  permalink: /davduf/status/1086689891851882496
+  reacted_id: 1086657757351165952
+  reacted_user_id: 594686101
+  retweet_id: null
+  retweeter: null
+  retweets_nb: 1094
+  screen_name: davduf
+  soup: null
+  text: "allo @Place_Beauvau - c'est pour un signalement - 329\n\nGaz lacrymog\xE8\
+    nes malgr\xE9 un passant au sol. Malaise cardiaque. \n\nNon assistance \xE0 personne\
+    \ en danger. \nArticle 223-6 du code P\xE9nal.\n\n#Rennes, #ActeXhttps://twitter.com/SamuelNohra/status/1086657757351165952\_\
+    \u2026"
+  timestamp: 2019-01-19 18:20:34
+  user_id: 12786782
+- !!python/object:twhatter.parser.tweet.TweetReaction
+  comments_nb: 6
+  hashtag_list: [LBD40, ActeX]
+  id: 1086672423553064961
+  likes_nb: 204
+  link_to: null
+  media: null
+  mention_list: [62747302]
+  permalink: /davduf/status/1086672423553064961
+  reacted_id: 1086666326981201920
+  reacted_user_id: 8350912
+  retweet_id: null
+  retweeter: null
+  retweets_nb: 343
+  screen_name: davduf
+  soup: null
+  text: "allo @Place_Beauvau - c'est pour un signalement - 327\n\n#LBD40, jambe droite\
+    \ sur vid\xE9aste\n\nParis, #ActeXhttps://twitter.com/Le_Figaro/status/1086666326981201920\_\
+    \u2026"
+  timestamp: 2019-01-19 17:11:09
+  user_id: 12786782
