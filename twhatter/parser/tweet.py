@@ -16,8 +16,10 @@ logger = logging.getLogger(__name__)
 class TweetBase(ExtractableMixin):
     #: Tweet ID
     id: int
-    #: Handle of the tweet's original author
-    screen_name: str
+    #: Tweeter handle of the tweet's author (the handle used for URLs)
+    username: str
+    #: Name of the tweet's author (the name as it appears on-screen)
+    fullname: str
     #: ID of the tweet's original author
     user_id: int
     #: Number of comments
@@ -77,7 +79,7 @@ class TweetBase(ExtractableMixin):
         return int(soup['data-item-id'])
 
     @classmethod
-    def extract_screen_name(cls, soup):
+    def extract_username(cls, soup):
         return cls._extract_from_div_tweet(soup, 'screen-name')
 
     @classmethod

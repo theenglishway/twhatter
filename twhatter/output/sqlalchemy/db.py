@@ -55,7 +55,7 @@ class Database(OutputBase):
 
         profiles = set()
         for t in client_timeline:
-            p = ClientProfile(t.screen_name)
+            p = ClientProfile(t.username)
             profiles.add(p)
         users = [User.from_raw(p.user) for p in profiles]
 

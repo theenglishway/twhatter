@@ -67,7 +67,7 @@ Display some user's tweets ::
 Display their profile information ::
 
     $ twhatter profile realDonaldTrump
-    User(id=25073877, screen_name='Donald J. Trump', join_date=datetime.datetime(2009, 3, 18, 0, 0), tweets_nb=40183, following_nb=45, followers_nb=57144827, likes_nb=7)
+    User(id=25073877, fullname='Donald J. Trump', join_date=datetime.datetime(2009, 3, 18, 0, 0), tweets_nb=40183, following_nb=45, followers_nb=57144827, likes_nb=7)
 
 Put them into a local database (by default in /tmp/db.sqlite) ::
 

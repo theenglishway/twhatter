@@ -12,12 +12,21 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class User(ExtractableMixin):
+    #: User ID
     id: int
-    screen_name: str
+    #: Tweeter handle (the one used for URLs)
+    username: str
+    # Name as it appears on screen
+    fullname: str
+    # Date at which the user joined
     join_date: datetime
+    # Total number of tweets
     tweets_nb: int
+    # Total number of accounts followed
     following_nb: int
+    # Total number of followers
     followers_nb: int
+    # Total number of likes sent by this user
     likes_nb: int
 
     #: The soup extracted from the raw HTML
@@ -37,8 +46,12 @@ class User(ExtractableMixin):
         return int(cls._extract_from_div(soup, 'ProfileNav', 'user-id'))
 
     @classmethod
-    def extract_screen_name(cls, soup):
+    def extract_fullname(cls, soup):
         return soup.find('a', 'ProfileHeaderCard-nameLink').text
+
+    @classmethod
+    def extract_username(cls, soup):
+        return soup.find('b', 'u-linkComplex-target').text
 
     @classmethod
     def extract_join_date(cls, soup):

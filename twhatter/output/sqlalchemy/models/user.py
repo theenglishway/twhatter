@@ -9,7 +9,7 @@ class User(Base):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
-    screen_name = Column(String)
+    fullname = Column(String)
     join_date = Column(DateTime)
     tweets_nb = Column(Integer)
     following_nb = Column(Integer)

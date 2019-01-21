@@ -46,7 +46,8 @@ class MediaInfo(NamedTuple):
 class TweetInfo(NamedTuple):
     """Class to hold information about a tweet that is already known"""
     id: int
-    screen_name: str
+    username: str
+    fullname: str
     user_id: int
     permalink: str
     timestamp: datetime = None
@@ -69,7 +70,8 @@ def tweet_collection():
     return {
         'plain': TweetInfo(
             id=1077838164813848576,
-            screen_name="the_english_way",
+            username="the_english_way",
+            fullname="theenglishway",
             user_id=943804775942033408,
             timestamp=datetime.utcfromtimestamp(1545811618),
             permalink="/the_english_way/status/1077838164813848576",
@@ -78,7 +80,8 @@ def tweet_collection():
         ),
         'reaction_tweet': TweetInfo(
             id=1078281840945963008,
-            screen_name="the_english_way",
+            username="the_english_way",
+            fullname="theenglishway",
             user_id=943804775942033408,
             timestamp=datetime.utcfromtimestamp(1545917399),
             permalink="/the_english_way/status/1078281840945963008",
@@ -87,7 +90,8 @@ def tweet_collection():
         ),
         'with_link': TweetInfo(
             id=1077505613079429120,
-            screen_name="the_english_way",
+            username="the_english_way",
+            fullname="theenglishway",
             user_id=943804775942033408,
             timestamp=datetime.utcfromtimestamp(1545732331),
             permalink="/the_english_way/status/1077505613079429120",
@@ -95,7 +99,8 @@ def tweet_collection():
         ),
         'retweet': TweetInfo(
             id=1055037291108974592,
-            screen_name="Senficon",
+            username="Senficon",
+            fullname="Julia Reda",
             user_id=14861745,
             retweeter="the_english_way",
             retweet_id=1055098556300828672,
@@ -104,7 +109,8 @@ def tweet_collection():
         ),
         'hashtags': TweetInfo(
             id=1039969574555471873,
-            screen_name="BurgerQuizOff",
+            username="BurgerQuizOff",
+            fullname="Burger Quiz",
             user_id=949604705772228608,
             retweeter="the_english_way",
             permalink="/BurgerQuizOff/status/1039969574555471873",
@@ -112,7 +118,8 @@ def tweet_collection():
         ),
         'mentions': TweetInfo(
             id=1077838164813848576,
-            screen_name="the_english_way",
+            username="the_english_way",
+            fullname="theenglishway",
             user_id=943804775942033408,
             timestamp=datetime.utcfromtimestamp(1545811618),
             permalink="/the_english_way/status/1077838164813848576",
@@ -120,7 +127,8 @@ def tweet_collection():
         ),
         'stats': TweetInfo(
             id=1039969574555471873,
-            screen_name="BurgerQuizOff",
+            username="BurgerQuizOff",
+            fullname="Burger Quiz",
             user_id=949604705772228608,
             permalink="/BurgerQuizOff/status/1039969574555471873",
             retweeter="the_english_way",
@@ -130,7 +138,8 @@ def tweet_collection():
         ),
         'media':TweetInfo(
             id=1086327536726900736,
-            screen_name="the_english_way",
+            username="the_english_way",
+            fullname="theenglishway",
             user_id=943804775942033408,
             permalink="/the_english_way/status/1086327536726900736",
             media=MediaInfo(
@@ -157,7 +166,7 @@ def raw_html_user_initial_page(raw_html_user_initial_page_factory, user):
 @pytest.fixture(scope="session")
 def raw_tweet_factory(raw_html_user_initial_page_factory):
     def _raw_tweet_factory(tweet_info):
-        user_page = tweet_info.retweeter or tweet_info.screen_name
+        user_page = tweet_info.retweeter or tweet_info.username
         soup = raw_html_user_initial_page_factory(user_page)
         return soup.find(id="stream-item-tweet-{}".format(tweet_info.id))
 
@@ -177,7 +186,8 @@ def tweet_test_data_factory(raw_tweet_factory, tweet_collection):
 class UserInfo(NamedTuple):
     """Class to hold information about an user that is already known"""
     id: int
-    screen_name: str
+    fullname: str
+    username: str
     join_date: datetime
     tweets_nb: int = None
     following_nb: int = None
@@ -190,7 +200,8 @@ def user_collection():
     return {
         'Marlene_beadles': UserInfo(
             id=295177446,
-            screen_name="Marlene Hansen",
+            username="Marlene_beadles",
+            fullname="Marlene Hansen",
             join_date=datetime(2011, 5, 8, 0, 0),
             tweets_nb=25,
             following_nb=342,
@@ -199,7 +210,8 @@ def user_collection():
         ),
         'the_english_way': UserInfo(
             id=943804775942033408,
-            screen_name="theenglishway",
+            fullname="theenglishway",
+            username="the_english_way",
             join_date=datetime(2017, 12, 21, 0, 0),
         ),
     }
