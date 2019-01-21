@@ -5,7 +5,7 @@
 import click
 import IPython
 
-from twhatter.output import Print, Json, Database
+from twhatter.output import Print, Json, Database, Yaml
 from twhatter.output.sqlalchemy import Tweet, User
 from twhatter.log import log_setup
 
@@ -33,6 +33,14 @@ def db(ctx, db_url):
 @click.pass_context
 def json(ctx, json_file):
     ctx.obj['output'] = Json(json_file)
+
+
+@main.group()
+@click.option('-f', '--yaml_file', type=str, default="/tmp/output.yaml", show_default=True)
+@click.pass_context
+def yaml(ctx, yaml_file):
+    ctx.obj['output'] = Yaml(yaml_file)
+
 
 @main.command()
 @click.option('-l', '--limit', type=int, default=100, show_default=True)
@@ -70,6 +78,8 @@ db.add_command(timeline)
 json.add_command(profile)
 json.add_command(timeline)
 
+yaml.add_command(profile)
+yaml.add_command(timeline)
 
 if __name__ == "__main__":
     main(obj={})
