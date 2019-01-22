@@ -8,7 +8,7 @@ import IPython
 from twhatter.output import Print, Json, Database, Yaml
 from twhatter.output.sqlalchemy import Tweet, User
 from twhatter.log import log_setup
-from twhatter.exploration import StrategyDumb, NodeTimeline, NodeProfile
+from twhatter.exploration import StrategyDumb, NodeTimeline
 
 
 @click.group()
@@ -58,7 +58,7 @@ def timeline(ctx, limit, user):
 @click.pass_context
 def profile(ctx, user):
     """Get basic info about some user"""
-    start_node = NodeProfile(user)
+    start_node = NodeTimeline(user)
     strategy = StrategyDumb(start_node)
     strategy(ctx.obj['output'])
 
