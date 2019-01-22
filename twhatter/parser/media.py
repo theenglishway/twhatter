@@ -5,6 +5,7 @@ from dataclasses import dataclass, fields, InitVar, field
 from typing import List, Optional
 
 from .mixins import ExtractableMixin
+from .base import ParserBase
 
 
 logger = logging.getLogger(__name__)
@@ -59,3 +60,28 @@ def media_factory(soup: BeautifulSoup) -> Optional[MediaBase]:
             continue
 
     return None
+
+
+class ParserMedia(ParserBase):
+    def __init__(self, soup):
+        super().__init__(soup)
+        self.soup = soup
+
+    def __iter__(self):
+        kwargs = {
+            f.name: MediaBase._extract_value(self.soup, f) for f in fields(MediaBase)
+        }
+
+        for kls in MediaBase.__subclasses__():
+            try:
+                if kls.condition(kwargs):
+                    m = kls(soup=self.soup, **kwargs)
+                    logger.debug("Parsed media {}".format(m))
+                    return m
+            except NotImplementedError:
+                continue
+
+        return None
+
+    def __len__(self):
+        return 1

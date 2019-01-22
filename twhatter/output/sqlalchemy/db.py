@@ -6,7 +6,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.exc import IntegrityError
 
 from twhatter.output import OutputBase
-from twhatter.client import ClientTimeline, ClientProfile
 
 
 # Registry of SQLAlchemy's models

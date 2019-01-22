@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from dataclasses import dataclass, fields, InitVar
 
 from .mixins import ExtractableMixin
+from .base import ParserBase
 
 
 logger = logging.getLogger(__name__)
@@ -43,7 +44,11 @@ class User(ExtractableMixin):
 
     @classmethod
     def extract_id(cls, soup):
-        return int(cls._extract_from_div(soup, 'ProfileNav', 'user-id'))
+        id_str = cls._extract_from_div(soup, 'ProfileNav', 'user-id')
+        if not id_str:
+            raise ValueError("No id could be found")
+
+        return int(id_str)
 
     @classmethod
     def extract_fullname(cls, soup):
@@ -91,3 +96,25 @@ def user_factory(soup: BeautifulSoup) -> User:
     u = User(**kwargs)
     logger.debug("Parsed user {}".format(u))
     return u
+
+
+class ParserUser(ParserBase):
+    def __init__(self, soup):
+        super().__init__(soup)
+        self.soup = soup
+
+    def __iter__(self):
+        try:
+            kwargs = {
+                f.name: User._extract_value(self.soup, f) for f in fields(User)
+            }
+        except ValueError:
+            logger.debug("Soup contained no data for {}".format(self))
+            return
+
+        u = User(**kwargs)
+        logger.debug("Parsed user {}".format(u))
+        yield u
+
+    def __len__(self):
+        return 1

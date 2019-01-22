@@ -23,17 +23,16 @@ class ExtractableMixin:
     @staticmethod
     def _extract_from_div(soup, div_class, data_kw):
         kw = "data-{}".format(data_kw)
-        return(
-            soup.find('div', class_=div_class, attrs={kw: True})[kw]
-        )
+        tag = soup.find('div', class_=div_class, attrs={kw: True})
+
+        return tag[kw] if tag else None
 
     @staticmethod
     def _extract_from_span(soup, distinct_span, data_kw):
-        return (
-            soup.find('span', distinct_span)
-                .find('span', attrs={data_kw: True})
-            [data_kw]
-        )
+        tag = (soup.find('span', distinct_span)
+                   .find('span', attrs={data_kw: True}))
+
+        return tag[data_kw] if tag else None
 
     @staticmethod
     def extract_soup(soup):

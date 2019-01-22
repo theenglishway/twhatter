@@ -1,5 +1,10 @@
+import logging
+
 from .base import StrategyBase
 from twhatter.parser import TweetBase, User
+
+
+logger = logging.getLogger(__name__)
 
 
 class StrategyDumb(StrategyBase):
@@ -8,9 +13,15 @@ class StrategyDumb(StrategyBase):
         super().__call__(output)
         output.start()
 
-        tweets = [t for t in self.starting_node if isinstance(t, TweetBase)]
+        objs = []
+        for s in self.starting_node:
+            for parser in self.parser_classes:
+                logger.debug("Parsing new data with {}".format(parser))
+                for o in parser(s):
+                    objs.append(o)
+        tweets = [t for t in objs if isinstance(t, TweetBase)]
         output.output_tweets(tweets)
-        users = [u for u in self.starting_node if isinstance(u, User)]
+        users = [u for u in objs if isinstance(u, User)]
         output.output_users(users)
 
         output.stop()
