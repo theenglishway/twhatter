@@ -3,11 +3,11 @@ from twhatter.output import Print
 
 @pytest.fixture
 def timeline_attribute():
-    return "twhatter.output.print.ClientTimeline"
+    return "twhatter.exploration.node.timeline.ClientTimeline"
 
 @pytest.fixture
 def profile_attribute():
-    return "twhatter.output.print.ClientProfile"
+    return "twhatter.exploration.node.profile.ClientProfile"
 
 @pytest.fixture
 def output():
@@ -19,9 +19,9 @@ def output():
     ('tests/fixtures/tweets/link_10.yaml', 10),
     ('tests/fixtures/tweets/reaction_9.yaml', 9),
 ])
-def test_output_tweets(capsys, timeline_mock_factory, output, fixtures_file, expected_len):
-    timeline_mock_factory(fixtures_file)
-    output.output_tweets(None, None)
+def test_output_tweets(capsys, tweets_factory, output, fixtures_file, expected_len):
+    tweets = tweets_factory(fixtures_file)
+    output.output_tweets(tweets)
 
     captured = capsys.readouterr()
     assert len(captured.out.split('\n')) == expected_len + 1
