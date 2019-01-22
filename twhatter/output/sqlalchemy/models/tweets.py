@@ -11,6 +11,7 @@ class Tweet(Base):
     __tablename__ = 'tweets'
 
     id = Column(Integer, primary_key=True)
+    fullname = Column(String)
     username = Column(String)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     comments_nb = Column(Integer)

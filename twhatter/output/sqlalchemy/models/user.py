@@ -10,6 +10,7 @@ class User(Base):
 
     id = Column(Integer, primary_key=True)
     fullname = Column(String)
+    username = Column(String)
     join_date = Column(DateTime)
     tweets_nb = Column(Integer)
     following_nb = Column(Integer)

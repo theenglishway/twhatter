@@ -28,10 +28,8 @@ class Database(OutputBase):
         Base.metadata.create_all(engine)
 
     def start(self):
-        return self.session_maker()
-
-    def stop(self, session):
-        session.close()
+        self.session = self.session_maker()
+        return self.session
 
     def _add_no_fail(self, session, obj):
         # This is an extremely unefficient way to add objects to the database,
@@ -46,36 +44,17 @@ class Database(OutputBase):
             return 0
 
     def output_tweets(self, tweets):
-        client_timeline = ClientTimeline(user, limit)
         Tweet = class_registry['Tweet']
-        User = class_registry['User']
-        session = self.start()
-        tweets = [Tweet.from_raw(t) for t in client_timeline]
         logger.info("Adding {} tweets".format(len(tweets)))
 
-        profiles = set()
-        for t in client_timeline:
-            p = ClientProfile(t.username)
-            profiles.add(p)
-        users = [User.from_raw(p.user) for p in profiles]
-
-        unique_errors = 0
-        for u in users:
-            self._add_no_fail(session, u)
-        for t in tweets:
-            unique_errors += self._add_no_fail(session, t)
-
-        if unique_errors:
-            logger.info(
-                "{} tweets were already in the database".format(unique_errors)
-            )
-
-        self.stop(session)
+        self.session.add_all([Tweet.from_raw(t) for t in tweets])
 
     def output_users(self, users):
         User = class_registry['User']
-        p = ClientProfile(user)
-        session = self.start()
+        logger.info("Adding {} tweets".format(len(users)))
 
-        self._add_no_fail(session, User.from_raw(p.user))
-        self.stop(session)
+        self.session.add_all([User.from_raw(u) for u in users])
+
+    def stop(self):
+        self.session.commit()
+        self.session.close()
