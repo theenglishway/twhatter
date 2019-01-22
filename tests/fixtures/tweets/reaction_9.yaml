@@ -1,5 +1,6 @@
 - !!python/object:twhatter.parser.tweet.TweetReaction
   comments_nb: 350
+  fullname: David Dufresne
   hashtag_list: [ActeX]
   id: 1086603899186880512
   likes_nb: 3413
@@ -12,7 +13,7 @@
   retweet_id: null
   retweeter: null
   retweets_nb: 2348
-  screen_name: davduf
+  username: davduf
   soup: null
   text: "La fatigue nerveuse, la pression, le renversement m\xE9diatique soudain,\
     \ le d\xE9ni politique qui s'acharne, et puis les larmes. \n\nEt aujourd'hui,\
@@ -23,6 +24,7 @@
   user_id: 12786782
 - !!python/object:twhatter.parser.tweet.TweetReaction
   comments_nb: 111
+  fullname: David Dufresne
   hashtag_list: []
   id: 1087111932560244736
   likes_nb: 1006
@@ -35,7 +37,7 @@
   retweet_id: null
   retweeter: null
   retweets_nb: 582
-  screen_name: davduf
+  username: davduf
   soup: null
   text: "\xABOn ne peut pas demander aux manifestants d'\xEAtre exemplaires si on\
     \ ne l'est pas soi-m\xEAme \xBB, a estim\xE9 dimanche le porte-parole du gouvernement,\
@@ -46,6 +48,7 @@
   user_id: 12786782
 - !!python/object:twhatter.parser.tweet.TweetReaction
   comments_nb: 16
+  fullname: David Dufresne
   hashtag_list: []
   id: 1087053227227578369
   likes_nb: 217
@@ -58,7 +61,7 @@
   retweet_id: null
   retweeter: null
   retweets_nb: 201
-  screen_name: davduf
+  username: davduf
   soup: null
   text: "Rectificatif: les images sont sign\xE9es @ClementLanot (dont le travail est\
     \ remarquable)  https://www.youtube.com/watch?v=fDugakictUw\_\u2026 ( \xE0 27mn11s)https://twitter.com/davduf/status/1087043032350973958\_\
@@ -67,6 +70,7 @@
   user_id: 12786782
 - !!python/object:twhatter.parser.tweet.TweetReaction
   comments_nb: 39
+  fullname: David Dufresne
   hashtag_list: []
   id: 1086946146398945281
   likes_nb: 332
@@ -79,7 +83,7 @@
   retweet_id: null
   retweeter: null
   retweets_nb: 100
-  screen_name: davduf
+  username: davduf
   soup: null
   text: "Les commentaires sur le fil Twitter de @LEXPRESS sont charmants comme un\
     \ dimanche matin.https://twitter.com/LEXPRESS/status/1086879785530331141\_\u2026"
@@ -87,6 +91,7 @@
   user_id: 12786782
 - !!python/object:twhatter.parser.tweet.TweetReaction
   comments_nb: 3
+  fullname: David Dufresne
   hashtag_list: [ActeX, Montepellier, LBD40]
   id: 1086779719599747072
   likes_nb: 103
@@ -99,7 +104,7 @@
   retweet_id: null
   retweeter: null
   retweets_nb: 158
-  screen_name: davduf
+  username: davduf
   soup: null
   text: "allo @Place_Beauvau - c'est pour un signalement - 325 (pr\xE9cisions)\n\n\
     #ActeX #Montepellier #LBD40https://twitter.com/OctavieMrl/status/1086770685471531008\_\
@@ -108,6 +113,7 @@
   user_id: 12786782
 - !!python/object:twhatter.parser.tweet.TweetReaction
   comments_nb: 5
+  fullname: David Dufresne
   hashtag_list: [ActeX, Montepellier, LBD40]
   id: 1086779578918584321
   likes_nb: 153
@@ -120,7 +126,7 @@
   retweet_id: null
   retweeter: null
   retweets_nb: 264
-  screen_name: davduf
+  username: davduf
   soup: null
   text: "allo @Place_Beauvau - c'est pour un signalement - 326 (pr\xE9cisions)\n\n\
     #ActeX #Montepellier #LBD40https://twitter.com/OctavieMrl/status/1086774517647790080\_\
@@ -129,6 +135,7 @@
   user_id: 12786782
 - !!python/object:twhatter.parser.tweet.TweetReaction
   comments_nb: 7
+  fullname: David Dufresne
   hashtag_list: [LBD40, Montepellier, ActeX]
   id: 1086707919138234369
   likes_nb: 154
@@ -141,7 +148,7 @@
   retweet_id: null
   retweeter: null
   retweets_nb: 264
-  screen_name: davduf
+  username: davduf
   soup: null
   text: "allo @Place_Beauvau - c'est pour un signalement - 331\n\nTir de #LBD40 dans\
     \ les fesses\n\n#Montepellier, #ActeXhttps://twitter.com/OctavieMrl/status/1086692368835923969\_\
@@ -150,6 +157,7 @@
   user_id: 12786782
 - !!python/object:twhatter.parser.tweet.TweetReaction
   comments_nb: 38
+  fullname: David Dufresne
   hashtag_list: [Rennes, ActeX]
   id: 1086689891851882496
   likes_nb: 840
@@ -162,7 +170,7 @@
   retweet_id: null
   retweeter: null
   retweets_nb: 1094
-  screen_name: davduf
+  username: davduf
   soup: null
   text: "allo @Place_Beauvau - c'est pour un signalement - 329\n\nGaz lacrymog\xE8\
     nes malgr\xE9 un passant au sol. Malaise cardiaque. \n\nNon assistance \xE0 personne\
@@ -172,6 +180,7 @@
   user_id: 12786782
 - !!python/object:twhatter.parser.tweet.TweetReaction
   comments_nb: 6
+  fullname: David Dufresne
   hashtag_list: [LBD40, ActeX]
   id: 1086672423553064961
   likes_nb: 204
@@ -184,7 +193,7 @@
   retweet_id: null
   retweeter: null
   retweets_nb: 343
-  screen_name: davduf
+  username: davduf
   soup: null
   text: "allo @Place_Beauvau - c'est pour un signalement - 327\n\n#LBD40, jambe droite\
     \ sur vid\xE9aste\n\nParis, #ActeXhttps://twitter.com/Le_Figaro/status/1086666326981201920\_\

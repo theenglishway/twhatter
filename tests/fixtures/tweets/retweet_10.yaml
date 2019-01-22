@@ -1,5 +1,6 @@
 - !!python/object:twhatter.parser.tweet.TweetRetweet
   comments_nb: 724
+  fullname: Twitter Movies
   hashtag_list: [FilmTwitter]
   id: 1072503598372638720
   likes_nb: 4089
@@ -12,7 +13,7 @@
   retweet_id: 1072583629258309632
   retweeter: Twitter
   retweets_nb: 802
-  screen_name: TwitterMovies
+  username: TwitterMovies
   soup: null
   text: "#FilmTwitter, you get to decide what the ultimate holiday movie is.\n \n\
     12/11  Round 1 \n12/12  Semi-Final \n12/13  Final\n12/14  Winner Crowned \n\n\
@@ -21,6 +22,7 @@
   user_id: 436266454
 - !!python/object:twhatter.parser.tweet.TweetRetweet
   comments_nb: 2474
+  fullname: Twitter Music
   hashtag_list: [ThisHappened]
   id: 1070274641594327041
   likes_nb: 534808
@@ -33,7 +35,7 @@
   retweet_id: 1070337144504365057
   retweeter: Twitter
   retweets_nb: 182492
-  screen_name: TwitterMusic
+  username: TwitterMusic
   soup: null
   text: "You did it ARMY. @BTS_twt was the most Tweeted about in 2018. \n\nMore music\
     \ facts in the thread below. Yep, #ThisHappenedhttps://twitter.com/TwitterData/status/1070272742849687553\_\
@@ -42,6 +44,7 @@
   user_id: 373471064
 - !!python/object:twhatter.parser.tweet.TweetRetweet
   comments_nb: 727
+  fullname: Stephen King
   hashtag_list: []
   id: 986643494499438592
   likes_nb: 35480
@@ -54,13 +57,14 @@
   retweet_id: 1063100430719180802
   retweeter: Twitter
   retweets_nb: 7095
-  screen_name: StephenKing
+  username: StephenKing
   soup: null
   text: Graffiti is the Twitter of the streets.
   timestamp: 2018-04-18 16:31:54
   user_id: 2233154425
 - !!python/object:twhatter.parser.tweet.TweetRetweet
   comments_nb: 127
+  fullname: Holly Brockwell
   hashtag_list: []
   id: 1060331216434577409
   likes_nb: 12788
@@ -73,7 +77,7 @@
   retweet_id: 1060694382020452352
   retweeter: Twitter
   retweets_nb: 3577
-  screen_name: holly
+  username: holly
   soup: null
   text: 'There are two social networks: Twitter, and all the ones that post screenshots
     of posts from Twitter'
@@ -81,6 +85,7 @@
   user_id: 7555262
 - !!python/object:twhatter.parser.tweet.TweetRetweet
   comments_nb: 141
+  fullname: Twitter India
   hashtag_list: [HappyDeepavali]
   id: 1060087039369068544
   likes_nb: 2744
@@ -93,7 +98,7 @@
   retweet_id: 1060202167657742336
   retweeter: Twitter
   retweets_nb: 368
-  screen_name: TwitterIndia
+  username: TwitterIndia
   soup: null
   text: 'We wish everyone who''s celebrating the festival of lights a very #HappyDeepavali
     May you and your family have a wonderful year ahead!'
@@ -101,6 +106,7 @@
   user_id: 103770785
 - !!python/object:twhatter.parser.tweet.TweetRetweet
   comments_nb: 265
+  fullname: Twitter Government
   hashtag_list: [BeAVoter]
   id: 1058023358032371712
   likes_nb: 1950
@@ -113,7 +119,7 @@
   retweet_id: 1058094152062304257
   retweeter: Twitter
   retweets_nb: 573
-  screen_name: TwitterGov
+  username: TwitterGov
   soup: null
   text: 'Election Day in the US is right around the corner. Everyone, including these
     people you may know, wants you to show up to the polls.
@@ -124,6 +130,7 @@
   user_id: 222953824
 - !!python/object:twhatter.parser.tweet.TweetRetweet
   comments_nb: 320
+  fullname: underdog
   hashtag_list: []
   id: 1057860310143508480
   likes_nb: 39435
@@ -136,13 +143,14 @@
   retweet_id: 1058014225585631233
   retweeter: Twitter
   retweets_nb: 8779
-  screen_name: lilyachty
+  username: lilyachty
   soup: null
   text: Yo twitter just might be the best place of all time
   timestamp: 2018-11-01 05:02:06
   user_id: 175198393
 - !!python/object:twhatter.parser.tweet.TweetRetweet
   comments_nb: 1795
+  fullname: Twitter Safety
   hashtag_list: []
   id: 1057675174735155200
   likes_nb: 15065
@@ -155,7 +163,7 @@
   retweet_id: 1057678634004217856
   retweeter: Twitter
   retweets_nb: 3710
-  screen_name: TwitterSafety
+  username: TwitterSafety
   soup: null
   text: "Activity that attempts to manipulate or disrupt Twitter\u2019s service is\
     \ not allowed. We remove this when we see it.\n\nYou can now specify what type\
@@ -164,6 +172,7 @@
   user_id: 95731075
 - !!python/object:twhatter.parser.tweet.TweetRetweet
   comments_nb: 125
+  fullname: Twitter Data
   hashtag_list: []
   id: 1057290498203926528
   likes_nb: 2438
@@ -178,7 +187,7 @@
   retweet_id: 1057363608764592133
   retweeter: Twitter
   retweets_nb: 579
-  screen_name: TwitterData
+  username: TwitterData
   soup: null
   text: "r u abbreving less rn? \n\nSince the switch to 280 characters a year ago,\
     \ we've seen an increase in people writing out full words and phrases.pic.twitter.com/pjnfyVmilY"
@@ -186,6 +195,7 @@
   user_id: 1526228120
 - !!python/object:twhatter.parser.tweet.TweetRetweet
   comments_nb: 4656
+  fullname: Ariana Grande
   hashtag_list: []
   id: 1055221967048060928
   likes_nb: 138890
@@ -198,7 +208,7 @@
   retweet_id: 1055232863933612033
   retweeter: Twitter
   retweets_nb: 21301
-  screen_name: ArianaGrande
+  username: ArianaGrande
   soup: null
   text: i love retweeting my own tweets
   timestamp: 2018-10-24 22:18:16

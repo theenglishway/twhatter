@@ -1,15 +1,17 @@
 - !!python/object:twhatter.parser.user.User
   followers_nb: 55903189
   following_nb: 140
+  fullname: Twitter
   id: 783214
   join_date: 2007-02-20 00:00:00
   likes_nb: 5590
-  screen_name: Twitter
+  username: Twitter
   soup: null
   tweets_nb: 8706
 
 - !!python/object:twhatter.parser.tweet.TweetTextOnly
   comments_nb: 970
+  fullname: Twitter
   hashtag_list: []
   id: 1087225139538862080
   likes_nb: 16305
@@ -22,13 +24,14 @@
   retweet_id: null
   retweeter: null
   retweets_nb: 2423
-  screen_name: Twitter
+  username: Twitter
   soup: null
   text: ''
   timestamp: 2019-01-21 05:47:27
   user_id: 783214
 - !!python/object:twhatter.parser.tweet.TweetTextOnly
   comments_nb: 3446
+  fullname: Twitter
   hashtag_list: []
   id: 1087059835370328064
   likes_nb: 52960
@@ -41,13 +44,14 @@
   retweet_id: null
   retweeter: null
   retweets_nb: 7850
-  screen_name: Twitter
+  username: Twitter
   soup: null
   text: Tweeting...
   timestamp: 2019-01-20 18:50:36
   user_id: 783214
 - !!python/object:twhatter.parser.tweet.TweetTextOnly
   comments_nb: 1269
+  fullname: Twitter
   hashtag_list: []
   id: 1086379213349769216
   likes_nb: 34958
@@ -60,13 +64,14 @@
   retweet_id: null
   retweeter: null
   retweets_nb: 6117
-  screen_name: Twitter
+  username: Twitter
   soup: null
   text: Weekends spark joy
   timestamp: 2019-01-18 21:46:03
   user_id: 783214
 - !!python/object:twhatter.parser.tweet.TweetTextOnly
   comments_nb: 15775
+  fullname: Twitter
   hashtag_list: []
   id: 1085915351605424128
   likes_nb: 49578
@@ -79,13 +84,14 @@
   retweet_id: null
   retweeter: null
   retweets_nb: 4849
-  screen_name: Twitter
+  username: Twitter
   soup: null
   text: You. In emojis.
   timestamp: 2019-01-17 15:02:49
   user_id: 783214
 - !!python/object:twhatter.parser.tweet.TweetTextOnly
   comments_nb: 3352
+  fullname: Twitter
   hashtag_list: [TriggersMeIn4Words]
   id: 1085718564286345217
   likes_nb: 39887
@@ -98,13 +104,14 @@
   retweet_id: null
   retweeter: null
   retweets_nb: 7958
-  screen_name: Twitter
+  username: Twitter
   soup: null
   text: 'Your edit button requests #TriggersMeIn4Words'
   timestamp: 2019-01-17 02:00:52
   user_id: 783214
 - !!python/object:twhatter.parser.tweet.TweetTextOnly
   comments_nb: 3502
+  fullname: Twitter
   hashtag_list: []
   id: 1085569366358257664
   likes_nb: 77065
@@ -117,13 +124,14 @@
   retweet_id: null
   retweeter: null
   retweets_nb: 20527
-  screen_name: Twitter
+  username: Twitter
   soup: null
   text: You got this
   timestamp: 2019-01-16 16:08:00
   user_id: 783214
 - !!python/object:twhatter.parser.tweet.TweetTextOnly
   comments_nb: 553
+  fullname: Twitter
   hashtag_list: []
   id: 1085265146644058112
   likes_nb: 4255
@@ -136,7 +144,7 @@
   retweet_id: null
   retweeter: null
   retweets_nb: 1060
-  screen_name: Twitter
+  username: Twitter
   soup: null
   text: Android, we got you. Starting today, tap  to switch between latest and top
     Tweets.pic.twitter.com/7rXo3BNEJ6
@@ -144,6 +152,7 @@
   user_id: 783214
 - !!python/object:twhatter.parser.tweet.TweetTextOnly
   comments_nb: 3320
+  fullname: Twitter
   hashtag_list: []
   id: 1084982024794861568
   likes_nb: 48030
@@ -156,13 +165,14 @@
   retweet_id: null
   retweeter: null
   retweets_nb: 8234
-  screen_name: Twitter
+  username: Twitter
   soup: null
   text: brb
   timestamp: 2019-01-15 01:14:07
   user_id: 783214
 - !!python/object:twhatter.parser.tweet.TweetTextOnly
   comments_nb: 9137
+  fullname: Twitter
   hashtag_list: []
   id: 1083581799467442177
   likes_nb: 138039
@@ -175,13 +185,14 @@
   retweet_id: null
   retweeter: null
   retweets_nb: 36589
-  screen_name: Twitter
+  username: Twitter
   soup: null
   text: Go to sleep
   timestamp: 2019-01-11 04:30:07
   user_id: 783214
 - !!python/object:twhatter.parser.tweet.TweetTextOnly
   comments_nb: 9685
+  fullname: Twitter
   hashtag_list: []
   id: 1082713943200751616
   likes_nb: 175003
@@ -194,7 +205,7 @@
   retweet_id: null
   retweeter: null
   retweets_nb: 55540
-  screen_name: Twitter
+  username: Twitter
   soup: null
   text: Hahahahahahahaha
   timestamp: 2019-01-08 19:01:34
