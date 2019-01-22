@@ -68,20 +68,7 @@ class ParserMedia(ParserBase):
         self.soup = soup
 
     def __iter__(self):
-        kwargs = {
-            f.name: MediaBase._extract_value(self.soup, f) for f in fields(MediaBase)
-        }
-
-        for kls in MediaBase.__subclasses__():
-            try:
-                if kls.condition(kwargs):
-                    m = kls(soup=self.soup, **kwargs)
-                    logger.debug("Parsed media {}".format(m))
-                    return m
-            except NotImplementedError:
-                continue
-
-        return None
+        return media_factory(self.soup)
 
     def __len__(self):
         return 1

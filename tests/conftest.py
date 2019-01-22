@@ -5,7 +5,7 @@ from click.testing import CliRunner
 from bs4 import BeautifulSoup
 
 from twhatter.exploration import NodeTimeline
-from twhatter.parser import tweet_factory
+from twhatter.parser.tweet import tweet_factory
 from typing import NamedTuple, List
 
 from twhatter.parser.media import MediaBase
