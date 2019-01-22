@@ -1,13 +1,6 @@
 import pytest
 from twhatter.output import Print
 
-@pytest.fixture
-def timeline_attribute():
-    return "twhatter.exploration.node.timeline.ClientTimeline"
-
-@pytest.fixture
-def profile_attribute():
-    return "twhatter.exploration.node.profile.ClientProfile"
 
 @pytest.fixture
 def output():
