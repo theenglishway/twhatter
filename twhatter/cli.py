@@ -8,6 +8,7 @@ import IPython
 from twhatter.output import Print, Json, Database, Yaml
 from twhatter.output.sqlalchemy import Tweet, User
 from twhatter.log import log_setup
+from twhatter.exploration import StrategyDumb, NodeTimeline, NodeProfile
 
 
 @click.group()
@@ -48,14 +49,18 @@ def yaml(ctx, yaml_file):
 @click.pass_context
 def timeline(ctx, limit, user):
     """Get some user's Tweets"""
-    ctx.obj['output'].output_tweets(user, limit)
+    start_node = NodeTimeline(user, limit)
+    strategy = StrategyDumb(start_node)
+    strategy(ctx.obj['output'])
 
 @main.command()
 @click.argument('user')
 @click.pass_context
 def profile(ctx, user):
     """Get basic info about some user"""
-    ctx.obj['output'].output_user(user)
+    start_node = NodeProfile(user)
+    strategy = StrategyDumb(start_node)
+    strategy(ctx.obj['output'])
 
 
 @db.command()

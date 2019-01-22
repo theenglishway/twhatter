@@ -45,7 +45,7 @@ class Database(OutputBase):
             session.rollback()
             return 0
 
-    def output_tweets(self, user, limit):
+    def output_tweets(self, tweets):
         client_timeline = ClientTimeline(user, limit)
         Tweet = class_registry['Tweet']
         User = class_registry['User']
@@ -72,7 +72,7 @@ class Database(OutputBase):
 
         self.stop(session)
 
-    def output_user(self, user):
+    def output_users(self, users):
         User = class_registry['User']
         p = ClientProfile(user)
         session = self.start()

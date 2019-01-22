@@ -3,7 +3,6 @@ import logging
 from bs4 import PageElement
 
 from .base import OutputBase
-from twhatter.client import ClientTimeline, ClientProfile
 
 
 logger = logging.getLogger(__name__)
@@ -20,15 +19,14 @@ class Yaml(OutputBase):
     def __init__(self, yaml_path):
         logger.info("Output set to {}".format(yaml_path))
         self.yaml_path = yaml_path
+        self.all_objects = []
 
-    def output_tweets(self, user, limit):
-        client_timeline = ClientTimeline(user, limit)
+    def output_tweets(self, tweets):
+        self.all_objects += tweets
 
+    def output_users(self, users):
+        self.all_objects += users
+
+    def stop(self):
         with open(self.yaml_path, 'w') as f:
-            yaml.dump([t for t in client_timeline], f, indent=2)
-
-    def output_user(self, user):
-        p = ClientProfile(user)
-
-        with open(self.yaml_path, 'w') as f:
-            yaml.dump(p.user, f, indent=2, default_flow_style=False)
+            yaml.dump([u for u in self.all_objects], f, indent=2, default_flow_style=False)

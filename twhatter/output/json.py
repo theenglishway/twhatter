@@ -4,7 +4,6 @@ from datetime import datetime
 from bs4 import PageElement
 
 from .base import OutputBase
-from twhatter.client import ClientTimeline, ClientProfile
 
 
 logger = logging.getLogger(__name__)
@@ -25,15 +24,14 @@ class Json(OutputBase):
     def __init__(self, json_path):
         logger.info("Output set to {}".format(json_path))
         self.json_path = json_path
+        self.all_objects = []
 
-    def output_tweets(self, user, limit):
-        client_timeline = ClientTimeline(user, limit)
+    def output_tweets(self, tweets):
+        self.all_objects += tweets
 
+    def output_users(self, users):
+        self.all_objects += users
+
+    def stop(self):
         with open(self.json_path, 'w') as f:
-            json.dump([t for t in client_timeline], f, cls=TweeterEncoder, indent=4)
-
-    def output_user(self, user):
-        p = ClientProfile(user)
-
-        with open(self.json_path, 'w') as f:
-            json.dump(p.user, f, cls=TweeterEncoder, indent=4)
+            json.dump([o for o in self.all_objects], f, cls=TweeterEncoder, indent=4)
