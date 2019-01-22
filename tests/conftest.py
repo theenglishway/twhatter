@@ -25,11 +25,6 @@ def user():
 def user_prolific():
     return "realDonaldTrump"
 
-
-@pytest.fixture(scope="session")
-def tweet_limit():
-    return 10
-
 # Fixtures for extraction of specific tweets of several kinds, whose author
 # and id are known in advance
 
@@ -134,7 +129,7 @@ def tweet_collection():
             retweeter="the_english_way",
             comments_nb=12,
             retweets_nb=176,
-            likes_nb=555
+            likes_nb=556
         ),
         'media':TweetInfo(
             id=1086327536726900736,
