@@ -28,6 +28,7 @@ class Database(OutputBase):
 
     def start(self):
         self.session = self.session_maker()
+        self.all_objs = []
         return self.session
 
     def _add_no_fail(self, session, obj):
@@ -46,14 +47,18 @@ class Database(OutputBase):
         Tweet = class_registry['Tweet']
         logger.info("Adding {} tweets".format(len(tweets)))
 
-        self.session.add_all([Tweet.from_raw(t) for t in tweets])
+        self.all_objs += [Tweet.from_raw(t) for t in tweets]
+        #self.session.add_all([Tweet.from_raw(t) for t in tweets])
 
     def output_users(self, users):
         User = class_registry['User']
         logger.info("Adding {} tweets".format(len(users)))
 
-        self.session.add_all([User.from_raw(u) for u in users])
+        self.all_objs += [User.from_raw(t) for t in users]
+        #self.session.add_all([User.from_raw(u) for u in users])
 
     def stop(self):
-        self.session.commit()
+        for o in self.all_objs:
+            self._add_no_fail(self.session, o)
+        #self.session.commit()
         self.session.close()
