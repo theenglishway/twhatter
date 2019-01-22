@@ -258,23 +258,6 @@ def tweet_factory(soup: BeautifulSoup) -> TweetBase:
         return TweetTextOnly(soup=soup, **kwargs)
 
 
-class TweetList:
-    def __init__(self, soup):
-        self.raw_tweets = soup.find_all('li', 'stream-item')
-
-    def __iter__(self):
-        for tweet in self.raw_tweets:
-            # Don't know what this u-dir stuff is about but if it's in there,
-            # it's not a tweet !
-            if not tweet.find_all('p', class_="u-dir"):
-                t = tweet_factory(tweet)
-                logger.debug("Parsed tweet {}".format(t))
-                yield t
-
-    def __len__(self):
-        return len(self.raw_tweets)
-
-
 class ParserTweet(ParserBase):
     def __init__(self, soup):
         super().__init__(soup)
