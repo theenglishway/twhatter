@@ -75,7 +75,7 @@ def shell(ctx):
         'User': User
     }
     IPython.start_ipython(argv=[], user_ns=user_ns)
-    ctx.obj['output'].stop(session)
+    ctx.obj['output'].stop()
 
 
 db.add_command(profile)
