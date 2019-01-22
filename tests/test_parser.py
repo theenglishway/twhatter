@@ -64,7 +64,7 @@ class TestUser:
     def test_user(self, raw_html_user_initial_page_factory, user_collection, user_handle):
         user_info = user_collection[user_handle]
         raw_user = raw_html_user_initial_page_factory(user_handle)
-        user = user_factory(raw_user)
+        user, = ParserUser(raw_user)
 
         for field, value in user_info._asdict().items():
             # It would be rather complicated to keep some test fixtures values

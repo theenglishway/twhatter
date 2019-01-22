@@ -89,15 +89,6 @@ class User(ExtractableMixin):
         return int(cls._extract_from_li(soup, 'ProfileNav-item--favorites', 'count'))
 
 
-def user_factory(soup: BeautifulSoup) -> User:
-    kwargs = {
-        f.name: User._extract_value(soup, f) for f in fields(User)
-    }
-    u = User(**kwargs)
-    logger.debug("Parsed user {}".format(u))
-    return u
-
-
 class ParserUser(ParserBase):
     def __init__(self, soup):
         super().__init__(soup)
