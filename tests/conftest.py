@@ -148,7 +148,7 @@ def tweet_collection():
 def raw_html_user_initial_page_factory():
     def _raw_html_user_initial_page(user):
         n = NodeTimeline(user)
-        response = n.get_user_timeline(user)
+        response = n._get_base_page(user)
         return BeautifulSoup(response.text, "lxml")
     return _raw_html_user_initial_page
 

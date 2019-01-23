@@ -18,6 +18,7 @@ from twhatter.parser import ParserTweet, ParserUser
               default='info', show_default=True)
 @click.pass_context
 def main(ctx, verbosity):
+    """Output various information from Twitter"""
     log_setup(verbosity)
     ctx.ensure_object(dict)
     ctx.obj['output'] = Print()
@@ -27,6 +28,7 @@ def main(ctx, verbosity):
 @click.option('-d', '--db_url', type=str, default="sqlite:////tmp/db.sqlite3", show_default=True)
 @click.pass_context
 def db(ctx, db_url):
+    """Output information into a database"""
     ctx.obj['output'] = Database(db_url)
 
 
@@ -34,6 +36,7 @@ def db(ctx, db_url):
 @click.option('-f', '--json_file', type=str, default="/tmp/output.json", show_default=True)
 @click.pass_context
 def json(ctx, json_file):
+    """Output information into a JSON file"""
     ctx.obj['output'] = Json(json_file)
 
 
@@ -41,6 +44,7 @@ def json(ctx, json_file):
 @click.option('-f', '--yaml_file', type=str, default="/tmp/output.yaml", show_default=True)
 @click.pass_context
 def yaml(ctx, yaml_file):
+    """Output information into a YAML file"""
     ctx.obj['output'] = Yaml(yaml_file)
 
 
@@ -58,7 +62,7 @@ def timeline(ctx, limit, user):
 @click.argument('user')
 @click.pass_context
 def profile(ctx, user):
-    """Get basic info about some user"""
+    """Get a user's profile information"""
     start_node = NodeTimeline(user, limit=1)
     strategy = StrategyDumb(start_node, ParserUser)
     strategy(ctx.obj['output'])
@@ -67,6 +71,7 @@ def profile(ctx, user):
 @db.command()
 @click.pass_context
 def shell(ctx):
+    """Launch an IPython session to interact with the database"""
     session = ctx.obj['output'].start()
     user_ns = {
         'db': ctx.obj['output'],

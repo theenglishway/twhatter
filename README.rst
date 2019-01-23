@@ -15,8 +15,8 @@ anonymous browsing session.
 
 This is mostly an attempt for me to produce some clean, functional and
 maintainable Python code. I have especially focused on a clean separation
-between data retrieval and output, which should allow to export data in any
-format.
+between data retrieval, Twitter pages exploration, and output, which allows
+to easily define and combine various crawling strategies and data formats.
 
 And why that terrible name ? Simple, "WHAT's going on TWITTER ?" => TWHATTER !
 
@@ -34,8 +34,11 @@ Anonymous client
 Data output
 ***********
 
-All scraped information can either be displayed on the terminal or stored into
-a local database.
+All scraped information can either be :
+
+* displayed on the terminal,
+* stored into a JSON / YAML file
+* stored into a local database.
 
 Installation
 ------------
@@ -44,7 +47,7 @@ Installation requires Python >= 3.6. ::
 
     $ pip install --user git+https://code.theenglishway.eu/theenglishway-corp/twhatter
 
-You then have to ensure that `~/.local/bin` in your `$PATH` or call
+You then have to ensure that `~/.local/bin` is in your `$PATH` or call
 `~/.local/bin/twhatter` instead of `twhatter` in the following examples
 
 Usage
@@ -52,12 +55,13 @@ Usage
 
 Display some user's tweets ::
 
-    $ twhatter timeline realDonaldTrump --limit 10
+    $ twhatter timeline realDonaldTrump --limit 40
     <TweetTextOnly (id=1083404900862545920, date=2019-01-10 16:47:11, likes=32033, likes=11087, likes=6935)>
     <TweetTextOnly (id=1083358775925460992, date=2019-01-10 13:43:54, likes=96565, likes=22596, likes=26802)>
     <TweetTextOnly (id=1083358611315789826, date=2019-01-10 13:43:15, likes=52849, likes=9344, likes=9571)>
     <TweetTextOnly (id=1083358150214979585, date=2019-01-10 13:41:25, likes=48808, likes=11096, likes=11499)>
     <TweetTextOnly (id=1083356326833602561, date=2019-01-10 13:34:10, likes=50695, likes=11743, likes=11045)>
+    ...
     <TweetTextOnly (id=1083353895030702080, date=2019-01-10 13:24:30, likes=85184, likes=19686, likes=27751)>
     <TweetRetweet (id=1083121283645272064, date=2019-01-09 22:00:12, likes=42640, likes=13189, likes=10242)>
     <TweetRetweet (id=1082774275390693376, date=2019-01-08 23:01:18, likes=52776, likes=14459, likes=2403)>
@@ -68,6 +72,11 @@ Display their profile information ::
 
     $ twhatter profile realDonaldTrump
     User(id=25073877, fullname='Donald J. Trump', join_date=datetime.datetime(2009, 3, 18, 0, 0), tweets_nb=40183, following_nb=45, followers_nb=57144827, likes_nb=7)
+
+Put them into a JSON/YAML file ::
+
+    $ twhatter json timeline realDonaldTrump
+    $ twhatter yaml profile realDonaldTrump
 
 Put them into a local database (by default in /tmp/db.sqlite) ::
 
@@ -85,6 +94,11 @@ Open a session on the local database and make queries with SQLAlchemy ::
      <Tweet (id=1026373195790802949),
      <Tweet (id=1026482814164844544),
      <Tweet (id=1027797734613504001)]
+
+In all cases the help is here ::
+
+    $ twhatter --help
+
 
 Tests
 -----

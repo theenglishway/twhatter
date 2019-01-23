@@ -64,7 +64,6 @@ def media_factory(soup: BeautifulSoup) -> Optional[MediaBase]:
 
 class ParserMedia(ParserBase):
     def __init__(self, soup):
-        super().__init__(soup)
         self.soup = soup
 
     def __iter__(self):

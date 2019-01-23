@@ -2,10 +2,11 @@ from typing import Any
 
 
 class ParserBase:
-    """Base class for a parser, an iterator that yield all elements of a certain
-    type within a given page"""
+    """Base class for a parser
+    A parser behaves like a generators, and yield all elements of a certain
+    type within the original page"""
     def __init__(self, soup: 'PageElement') -> None:
-        pass
+        raise NotImplementedError()
 
     def __iter__(self) -> Any:
         raise NotImplementedError()

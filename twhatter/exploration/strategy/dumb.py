@@ -8,7 +8,8 @@ logger = logging.getLogger(__name__)
 
 
 class StrategyDumb(StrategyBase):
-    """This strategy only explores the initial node"""
+    """This strategy only explores the initial node and scrolls through it
+    until exhaustion"""
     def __call__(self, output):
         super().__call__(output)
         output.start()
@@ -20,6 +21,7 @@ class StrategyDumb(StrategyBase):
                 logger.debug("Parsing new soup with {}".format(parser))
                 for o in parser(s):
                     objs.append(o)
+
         tweets = [t for t in objs if isinstance(t, TweetBase)]
         output.output_tweets(tweets)
         users = [u for u in objs if isinstance(u, User)]

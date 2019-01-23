@@ -12,6 +12,9 @@ logger = logging.getLogger(__name__)
 
 
 class NodeTimeline(NodeBase):
+    """Implementation of the "timeline" node, which is the page accessed by
+    https://twitter.com/the_user_name, that can be scrolled until the beginning
+    of times."""
     user_agent = generate_user_agent(os='linux')
 
     def __init__(self, user, limit=100):
@@ -28,8 +31,8 @@ class NodeTimeline(NodeBase):
         logger.info("{} tweets retrieved so far".format(self.nb_tweets))
 
     @classmethod
-    def get_user_timeline(cls, user_handle):
-        logger.info("Loading initial timeline for {}".format(user_handle))
+    def _get_base_page(cls, user_handle):
+        logger.info("Loading base page for {}'s timeline".format(user_handle))
         url = "https://twitter.com/{}".format(user_handle)
         return requests.get(
             url,
@@ -39,8 +42,8 @@ class NodeTimeline(NodeBase):
             }
         )
 
-    def get_more_tweets(self):
-        logger.info("Loading more tweets from {}".format(self.user))
+    def _scroll(self):
+        logger.info("Scrolling in {}'s timeline".format(self.user))
         return requests.get(
             "https://twitter.com/i/profiles/show/{}/timeline/tweets".format(self.user),
             params= dict(
@@ -54,14 +57,14 @@ class NodeTimeline(NodeBase):
 
     def __iter__(self):
         super().__iter__()
-        tweets = self.get_user_timeline(self.user)
-        soup = BeautifulSoup(tweets.text, "lxml")
+        base = self._get_base_page(self.user)
+        soup = BeautifulSoup(base.text, "lxml")
         self._update_state(soup)
         yield soup
 
         while self.nb_tweets < self.limit:
-            more_tweets = self.get_more_tweets()
-            html = json.loads(more_tweets.content)
+            more = self._scroll()
+            html = json.loads(more.content)
 
             soup = BeautifulSoup(html['items_html'], "lxml")
             if not soup.text:

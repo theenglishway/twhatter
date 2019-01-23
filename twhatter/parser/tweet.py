@@ -257,8 +257,6 @@ def tweet_factory(soup: BeautifulSoup) -> TweetBase:
 
 class ParserTweet(ParserBase):
     def __init__(self, soup):
-        super().__init__(soup)
-
         # Here 'soup' can be either the full html page as loaded initially,
         # or raw HTML incoming from the XHR requests sent when browsing deeper
         # in the page, so the strategy is adapted to work in both cases.

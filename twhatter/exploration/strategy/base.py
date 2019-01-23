@@ -9,18 +9,16 @@ class StrategyBase:
     parser_classes = []
 
     def __init__(self, starting_node: 'NodeBase', *parser_classes: 'ParserBase') -> None:
-        logger.debug(
-            "Initializing {} with starting_node={} and parser_classes={}".format(
-                self.__class__.__qualname__,
-                starting_node,
-                parser_classes
-            )
-        )
+        """
+        :param starting_node: the node from which exploration starts
+        :param parser_classes: parsers that should be applied on each iteration
+        of the node
+        """
         self.starting_node = starting_node
         self.parser_classes = parser_classes
 
     def __call__(self, output) -> None:
-        logger.debug("Applying {}".format(self.__class__.__qualname__))
+        logger.debug("Applying {}".format(self))
 
     def __repr__(self):
         return "<{} (starting_node={}, parsers={})>".format(
