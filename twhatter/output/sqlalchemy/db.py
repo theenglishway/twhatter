@@ -14,7 +14,7 @@ class_registry = {}
 Base = declarative_base(class_registry=class_registry)
 
 # Session maker
-Session = scoped_session(sessionmaker(autoflush=False))
+Session = sessionmaker(autoflush=False)
 
 logger = logging.getLogger(__name__)
 
@@ -52,7 +52,7 @@ class Database(OutputBase):
 
     def output_users(self, users):
         User = class_registry['User']
-        logger.info("Adding {} tweets".format(len(users)))
+        logger.info("Adding {} user".format(len(users)))
 
         self.all_objs += [User.from_raw(t) for t in users]
         #self.session.add_all([User.from_raw(u) for u in users])
