@@ -21,18 +21,26 @@ class Tweet(Base):
     permalink = Column(String)
     text = Column(String)
     _hashtag_list = Column("hashtag_list", String)
-    _mention_list = Column(String)
+    _mention_list = Column("mention_list", String)
+
+    link_to = Column(String)
+
+    retweeter = Column(String)
+    retweet_id = Column(Integer)
+
+    reacted_id = Column(Integer)
+    reacted_user_id = Column(Integer)
 
     user = relationship('User', backref='tweets')
     #media = relationship('Media', backref='tweets')
 
     @hybrid_property
     def hashtag_list(self):
-        return self._hashtag_list.split(',')
+        return self._hashtag_list.split(',') if self._hashtag_list else []
 
     @hashtag_list.setter
-    def hashtag_list(self, value):
-        self._hashtag_list = ','.join(value)
+    def hashtag_list(self, values_list):
+        self._hashtag_list = ','.join(values_list)
 
     @hashtag_list.expression
     def hashtag_list(cls):
@@ -40,11 +48,14 @@ class Tweet(Base):
 
     @hybrid_property
     def mention_list(self):
-        return [int(user_id) for user_id in self._mention_list.split(',')]
+        if self._mention_list:
+            return [int(user_id) for user_id in self._mention_list.split(',')]
+        else:
+            return []
 
     @mention_list.setter
-    def mention_list(self, value):
-        self._mention_list = ','.join(value)
+    def mention_list(self, values_list):
+        self._mention_list = ','.join([str(v) for v in values_list])
 
     @mention_list.expression
     def mention_list(cls):
@@ -58,12 +69,6 @@ class Tweet(Base):
         kwargs = {
             k: v
             for k, v in asdict(raw_tweet).items()
-            if k not in [
-                'retweeter', 'retweet_id',
-                'reacted_id', 'reacted_user_id',
-                'link_to', 'soup',
-                'hashtag_list', 'mention_list',
-                'media'
-            ]
+            if k not in ['soup', 'media']
         }
         return cls(**kwargs)
