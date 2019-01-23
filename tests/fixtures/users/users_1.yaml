@@ -1,0 +1,10 @@
+- !!python/object:twhatter.parser.user.User
+  followers_nb: 10
+  following_nb: 30
+  fullname: theenglishway
+  id: 943804775942033408
+  join_date: 2017-12-21 00:00:00
+  likes_nb: 17
+  username: the_english_way
+  soup: null
+  tweets_nb: 83
