@@ -261,16 +261,32 @@ def tweet_factory(soup: BeautifulSoup) -> TweetBase:
 class ParserTweet(ParserBase):
     def __init__(self, soup):
         super().__init__(soup)
-        self.raw_tweets = soup.find_all('li', 'stream-item')
+
+        # Here 'soup' can be either the full html page as loaded initially,
+        # or raw HTML incoming from the XHR requests sent when browsing deeper
+        # in the page, so the strategy is adapted to work in both cases.
+        # We locate the first tweet ...
+        # TODO solve the case when the timeline has a pinned tweet
+        self.first = soup.find(
+            'li',
+            class_='stream-item',
+            attrs={'data-item-type': 'tweet'}
+        )
 
     def __iter__(self):
-        for tweet in self.raw_tweets:
-            # Don't know what this u-dir stuff is about but if it's in there,
-            # it's not a tweet !
-            if not tweet.find_all('p', class_="u-dir"):
-                t = tweet_factory(tweet)
-                logger.debug("Parsed tweet {}".format(t))
-                yield t
+        current = self.first
+        while True:
+            t = tweet_factory(current)
+            logger.debug("Parsed tweet {}".format(t))
+            yield t
+
+            # ... and then we iterate on all the siblings
+            # This allows to not fall into the hierarchy, and yield tweets that
+            # are not only embedded within other ones (e.g. retweets or
+            # reaction tweets)
+            current = current.find_next_sibling('li')
+            if not current:
+                break
 
     def __len__(self):
-        return len(self.raw_tweets)
+        return len(self.first.find_next_siblings('li')) + 1

@@ -15,8 +15,9 @@ class StrategyDumb(StrategyBase):
 
         objs = []
         for s in self.starting_node:
+            logger.debug("Got new soup from {}".format(self.starting_node))
             for parser in self.parser_classes:
-                logger.debug("Parsing new data with {}".format(parser))
+                logger.debug("Parsing new soup with {}".format(parser))
                 for o in parser(s):
                     objs.append(o)
         tweets = [t for t in objs if isinstance(t, TweetBase)]

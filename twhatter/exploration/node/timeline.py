@@ -25,6 +25,7 @@ class NodeTimeline(NodeBase):
         tweets = ParserTweet(soup)
         self.nb_tweets += len(tweets)
         *_, self.earliest_tweet_id = (t.id for t in tweets)
+        logger.info("{} tweets retrieved so far".format(self.nb_tweets))
 
     @classmethod
     def get_user_timeline(cls, user_handle):
@@ -58,12 +59,13 @@ class NodeTimeline(NodeBase):
         self._update_state(soup)
         yield soup
 
-        while True and self.nb_tweets < self.limit:
+        while self.nb_tweets < self.limit:
             more_tweets = self.get_more_tweets()
             html = json.loads(more_tweets.content)
 
             soup = BeautifulSoup(html['items_html'], "lxml")
             if not soup.text:
+                logger.info("Latest request provided no explorable content")
                 break
 
             self._update_state(soup)
