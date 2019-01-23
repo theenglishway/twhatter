@@ -60,12 +60,15 @@ class TweetBase(ExtractableMixin):
     soup: InitVar[BeautifulSoup] = None
 
     def __repr__(self):
-        return ("<{0} "
-                "(id={1.id}, "
-                "date={1.timestamp}, "
-                "likes={1.likes_nb}, "
-                "retweets={1.retweets_nb}, "
-                "comments={1.comments_nb})>".format(self.__class__.__qualname__, self))
+        return (
+            "<{0} "
+            "(id={1.id}, "
+            "date={1.timestamp}, "
+            "l/re/c={1.likes_nb}/{1.retweets_nb}/{1.comments_nb})>".format(
+                self.__class__.__qualname__,
+                self
+            )
+        )
 
     @staticmethod
     def condition(kwargs: dict) -> bool:
@@ -202,9 +205,7 @@ class TweetLink(TweetBase):
         return ("<{0} "
                 "(id={1.id}, "
                 "date={1.timestamp}, "
-                "likes={1.likes_nb}, "
-                "retweets={1.retweets_nb}, "
-                "comments={1.comments_nb}, "
+                "l/re/c={1.likes_nb}/{1.retweets_nb}/{1.comments_nb}) "
                 "link_to={1.link_to})>".format(self.__class__.__qualname__, self))
 
 class TweetRetweet(TweetBase):
@@ -217,9 +218,7 @@ class TweetRetweet(TweetBase):
         return ("<{0} "
                 "(id={1.id}, "
                 "date={1.timestamp}, "
-                "likes={1.likes_nb}, "
-                "retweets={1.retweets_nb}, "
-                "comments={1.comments_nb}, "
+                "l/re/c={1.likes_nb}/{1.retweets_nb}/{1.comments_nb}) "
                 "retweeter={1.retweeter}, "
                 "retweet_id={1.retweet_id})>".format(self.__class__.__qualname__, self))
 
@@ -233,9 +232,7 @@ class TweetReaction(TweetBase):
         return ("<{0} "
                 "(id={1.id}, "
                 "date={1.timestamp}, "
-                "likes={1.likes_nb}, "
-                "retweets={1.retweets_nb}, "
-                "comments={1.comments_nb}, "
+                "l/re/c={1.likes_nb}/{1.retweets_nb}/{1.comments_nb}) "
                 "reacted_id={1.reacted_id}, "
                 "reacted_user_id={1.reacted_user_id})>".format(self.__class__.__qualname__, self))
 
